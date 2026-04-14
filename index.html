@@ -255,38 +255,6 @@
       font-size: 0.875rem; color: var(--ink-muted); line-height: 1.7;
     }
 
-    /* ── How it works ───────────────────────────────────────────────────────── */
-    .how {
-      background: var(--surface); border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border); padding: 7rem 1.5rem;
-    }
-    .how-header { max-width: 520px; margin: 0 auto 4.5rem; text-align: center; }
-    .steps {
-      max-width: 1120px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-      background: var(--border); border: 1px solid var(--border); border-radius: 18px;
-      overflow: hidden;
-    }
-    .step {
-      background: var(--bg); padding: 2rem 1.75rem;
-    }
-    .step-num {
-      font-family: 'Noto Serif', serif; font-size: 1.5rem; font-weight: 600;
-      color: var(--green); opacity: 0.35; margin-bottom: 1rem; line-height: 1;
-    }
-    .step-title {
-      font-size: 0.9rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem;
-    }
-    .step-desc {
-      font-size: 0.8rem; color: var(--ink-muted); line-height: 1.65;
-    }
-    .step-badge {
-      display: inline-block; margin-top: 0.85rem;
-      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--brown); background: rgba(113,90,62,0.08);
-      border: 1px solid rgba(113,90,62,0.18);
-      padding: 0.18rem 0.5rem; border-radius: 5px;
-    }
 
     /* ── Security ───────────────────────────────────────────────────────────── */
     .security { padding: 7rem 1.5rem; }
@@ -422,7 +390,6 @@
       </div>
     </a>
     <ul class="nav-links">
-      <li><a href="#how">How it works</a></li>
       <li><a href="#security">Security</a></li>
       <li><a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener">Protocol</a></li>
     </ul>
@@ -539,41 +506,6 @@
       <div class="phil-icon">◈</div>
       <div class="phil-title">Real yield, not emissions</div>
       <div class="phil-desc">Returns come from lending yield on Aave V3 — not token inflation. USDC in, USDC out. Price Per Share compounds directly.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── How it works ─────────────────────────────────────────────────────────── -->
-<section class="how" id="how">
-  <div class="how-header">
-    <div class="section-eyebrow">How it works</div>
-    <h2 class="section-title">Four steps. No complexity.</h2>
-    <p class="section-desc">Connect your wallet on Base and start in minutes. No KYC, no minimums.</p>
-  </div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-title">Connect & deposit</div>
-      <div class="step-desc">Connect your Base wallet, approve USDC, and deposit into the vault. You receive fbUSDC shares representing your stake.</div>
-      <span class="step-badge">ERC-4626</span>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-title">Capital deployed</div>
-      <div class="step-desc">The fund manager deploys capital to Aave V3 via a 24h Timelock-governed transaction. Reserve ratio always maintained.</div>
-      <span class="step-badge">Aave V3 · Base</span>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-title">Yield accrues silently</div>
-      <div class="step-desc">Lending interest accumulates in real time. Price Per Share rises continuously — no harvest transactions required.</div>
-      <span class="step-badge">Auto-compounding</span>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <div class="step-title">Redeem at any time</div>
-      <div class="step-desc">Burn your fbUSDC shares to receive USDC at the current Price Per Share. No lock-up period for standard redemptions.</div>
-      <span class="step-badge">Exit on your terms</span>
     </div>
   </div>
 </section>
