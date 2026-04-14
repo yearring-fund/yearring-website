@@ -568,6 +568,7 @@
     </a>
     <ul class="nav-links">
       <li><a href="#principles">Principles</a></li>
+      <li><a href="#why">Why YearRing</a></li>
       <li><a href="#security">Security</a></li>
       <li><a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener">Protocol ↗</a></li>
     </ul>
@@ -684,41 +685,41 @@
   <div class="principles-grid wrap">
     <div class="principle">
       <div class="principle-num">01</div>
-      <div class="principle-title">No black boxes in capital management.</div>
-      <div class="principle-body">Every transaction, every fee accrual, every parameter change is written to Base and verifiable by anyone. We do not have private databases, off-chain records, or unreported positions. If it isn't on-chain, it doesn't exist.</div>
+      <div class="principle-title">Opacity in capital management is a structural risk — not a design choice.</div>
+      <div class="principle-body">Private databases, off-chain records, and opaque position reporting are not just inconvenient — they are the conditions under which misuse becomes possible. Every transaction, fee accrual, and parameter change in YearRing is written to Base. If it is not on-chain, it does not exist. There is no other record.</div>
     </div>
     <div class="principle">
       <div class="principle-num">02</div>
-      <div class="principle-title">Investor protection before protocol growth.</div>
-      <div class="principle-body">All admin operations require a 24-hour Timelock. Emergency exit is always available — at any system state. The protocol's growth ambitions will never be allowed to compromise an investor's right to exit. This constraint is architectural, not just a policy.</div>
+      <div class="principle-title">Your right to exit is not subject to protocol conditions.</div>
+      <div class="principle-body">Emergency exit is always available — regardless of system state, strategy liquidity, or governance status. The protocol's growth ambitions cannot override this guarantee because it is enforced architecturally, not by policy. No vote, no upgrade path, and no operational constraint can remove it.</div>
     </div>
     <div class="principle">
       <div class="principle-num">03</div>
-      <div class="principle-title">Real yield must come from assets, not emissions.</div>
-      <div class="principle-body">Returns are sourced from lending yield on Aave V3 — not token inflation, not liquidity mining subsidies, not bootstrapped reward schedules. What Price Per Share shows is what the market is paying to borrow USDC. Nothing is fabricated.</div>
+      <div class="principle-title">Yield without an underlying source is a promise, not a return.</div>
+      <div class="principle-body">Emission-based yields subsidize present returns by diluting future ones. YearRing does not participate in that accounting. Price Per Share reflects only what the market pays to borrow USDC on Aave V3. When that number grows, it is because something real happened — not because a token was minted.</div>
     </div>
   </div>
 </section>
 
 <!-- ── Why YearRing ────────────────────────────────────────────────────────── -->
-<section class="section-pad" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+<section class="section-pad" id="why" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="why-grid wrap">
     <div>
-      <div class="section-eyebrow">Product philosophy</div>
-      <h2 class="section-title">DeFi opens yield.<br /><em>YearRing adds structure.</em></h2>
+      <div class="section-eyebrow">Why we exist</div>
+      <h2 class="section-title">DeFi solved access.<br /><em>It didn't solve structure.</em></h2>
       <p class="section-body" style="margin-bottom:1.5rem;">
-        Yield infrastructure like Aave is excellent. But a deposit in Aave is a single-strategy
-        position — with no management layer, no reserve policy, no governance delay on operational
-        changes, and no unified share accounting.
+        Most on-chain yield today is accessed the same way: deposit into a protocol, earn a rate,
+        watch it manually. There is no management layer. No reserve policy that protects your exit.
+        No governed delay before a parameter that affects your capital can change. No unified
+        accounting that tells you clearly what your position is worth.
       </p>
       <p class="section-body" style="margin-bottom:1.5rem;">
-        YearRing wraps that infrastructure in a fund structure: a governed, transparent container
-        where capital allocation, exit conditions, fee mechanics, and safety boundaries are all
-        defined up front — and enforced on-chain.
+        That is not a criticism of yield protocols — it is a description of scope. Aave is lending
+        infrastructure. It was not designed to manage capital on your behalf. YearRing was.
       </p>
       <p class="section-body">
-        The goal is not to increase your transaction frequency. It is to reduce the complexity
-        you have to carry — and replace it with a structure you can verify.
+        We exist because there is a gap between "access to yield" and "capital that is being
+        managed well" — and closing that gap requires structure, not just a better rate.
       </p>
     </div>
     <div class="why-visual">
@@ -778,21 +779,91 @@
   </div>
 </section>
 
+<!-- ── Why Not Aave ─────────────────────────────────────────────────────────── -->
+<section class="wna-section section-pad">
+  <div class="wna-inner wrap">
+    <div class="wna-left">
+      <div class="section-eyebrow">Honest comparison</div>
+      <h2 class="section-title">Why not just use<br /><em>Aave directly?</em></h2>
+      <p class="section-body" style="margin-bottom:1.5rem;">
+        You should use Aave directly if all you want is yield access. It is excellent at that.
+        The question is whether yield access is sufficient for your goals.
+      </p>
+      <p class="section-body" style="margin-bottom:1.5rem;">
+        When you deposit into Aave, you hold an aToken. It accrues interest. There is no management
+        layer between you and the strategy. Every parameter — interest rate model, collateral factor,
+        reserve factor — can change without your involvement and without advance notice.
+      </p>
+      <p class="section-body" style="margin-bottom:1.5rem;">
+        That is a deliberate design decision by Aave — optimised for protocol flexibility,
+        not depositor predictability. YearRing makes the opposite trade: less flexibility
+        at the protocol layer, more protection at the depositor layer.
+      </p>
+      <p class="section-body">
+        If you want to know — before you deposit — exactly what governance delay applies to your
+        capital, what reserve protects your exit, and what conditions would trigger an emergency
+        return of funds: that is what YearRing is for.
+      </p>
+    </div>
+    <div class="wna-right">
+      <div class="wna-answer">
+        <div class="wna-answer-row">
+          <div class="wna-icon">⏱</div>
+          <div>
+            <div class="wna-label">Parameter changes affecting your capital</div>
+            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> Immediate. Governance can adjust reserve factor, fee tiers, and risk parameters with no delay visible to depositors.<br/><br/><strong style="color:var(--green);">YearRing:</strong> Every admin operation is queued through a 24-hour on-chain Timelock. You have a window to observe and act before any change takes effect.</div>
+          </div>
+        </div>
+        <div class="wna-answer-row">
+          <div class="wna-icon">🔒</div>
+          <div>
+            <div class="wna-label">What happens if the strategy fails</div>
+            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> You hold aTokens in a single strategy. There is no separate exit mechanism outside of standard redemption.<br/><br/><strong style="color:var(--green);">YearRing:</strong> Emergency exit is a permanent, architecture-level path. A designated guardian can trigger it at any time — bypassing the Timelock — and all depositors can claim their pro-rata USDC immediately.</div>
+          </div>
+        </div>
+        <div class="wna-answer-row">
+          <div class="wna-icon">📊</div>
+          <div>
+            <div class="wna-label">Position clarity</div>
+            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> aToken balance grows over time but requires tracking conversion rates to know your USDC value precisely.<br/><br/><strong style="color:var(--green);">YearRing:</strong> Price Per Share is a single, on-chain number. Your shares × PPS = your USDC. No secondary calculation required.</div>
+          </div>
+        </div>
+        <div class="wna-answer-row" style="border-bottom:none;">
+          <div class="wna-icon">🏦</div>
+          <div>
+            <div class="wna-label">Reserve liquidity</div>
+            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> Redemption depends on available utilisation. During high-utilisation periods, liquidity can be limited.<br/><br/><strong style="color:var(--green);">YearRing:</strong> A configurable percentage of deposits is always held as idle USDC in the vault. Standard redemptions are served from reserve — no strategy divestment required.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── Security ────────────────────────────────────────────────────────────── -->
 <section class="section-pad" id="security">
   <div class="security-header-row wrap">
     <div>
       <div class="section-eyebrow">Security architecture</div>
-      <h2 class="section-title" style="margin-bottom:0;">Designed for capital that matters.</h2>
+      <h2 class="section-title" style="margin-bottom:0;">Trust is a design property,<br />not a marketing claim.</h2>
     </div>
-    <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-end;">
-      <div class="security-status-badge">
-        <span class="status-dot dot-ok"></span>
-        Protocol live
+    <div style="background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:0.85rem;min-width:260px;">
+      <div style="font-size:0.58rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-ghost);padding-bottom:0.6rem;border-bottom:1px solid var(--border);">Security status</div>
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span class="status-dot dot-ok" style="flex-shrink:0;"></span>
+        <span style="font-size:0.75rem;font-weight:600;color:var(--ink);">Protocol live on Base</span>
       </div>
-      <div class="security-status-badge">
-        <span class="status-dot dot-pending"></span>
-        Audit in preparation
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span class="status-dot dot-ok" style="flex-shrink:0;"></span>
+        <span style="font-size:0.75rem;font-weight:600;color:var(--ink);">Timelock &amp; emergency exit active</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.6rem;">
+        <span class="status-dot dot-ok" style="flex-shrink:0;"></span>
+        <span style="font-size:0.75rem;font-weight:600;color:var(--ink);">Contracts verified on BaseScan</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.6rem;">
+        <span class="status-dot dot-pending" style="flex-shrink:0;margin-top:4px;"></span>
+        <span style="font-size:0.75rem;font-weight:600;color:var(--ink);">Formal audit — in preparation<br/><span style="font-weight:400;color:var(--ink-faint);font-size:0.7rem;">Disclosed openly. Operating under limited-access allowlist until complete.</span></span>
       </div>
     </div>
   </div>
@@ -834,8 +905,8 @@
         <div class="sec-title">Smart Contract Audit</div>
         <span class="sec-tag tag-pending">In preparation</span>
       </div>
-      <div class="sec-body">A formal security audit is currently being prepared. In the interim, the protocol operates under a limited-access allowlist. We do not consider audit-pending status equivalent to audit-passed, and we have designed the system to be auditable by construction — modular, minimal, and well-documented.</div>
-      <div class="sec-detail">Audit scope · auditor · expected timeline — to be published</div>
+      <div class="sec-body">Audit-pending is not audit-passed. We say this clearly — and then we say what it means for you: the protocol is live under a limited-access allowlist, with on-chain controls active, and the codebase is structured by design to be independently reviewable. The audit process formalises what is already verifiable by anyone with a text editor and a Base RPC.</div>
+      <div class="sec-detail">Audit scope · auditor · timeline — to be published publicly before any allowlist expansion</div>
     </div>
     <div class="sec-card">
       <div class="sec-card-top">
