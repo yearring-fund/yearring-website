@@ -3,644 +3,646 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>YearRing Fund Protocol</title>
-  <meta name="description" content="On-chain fund management on Base. Non-custodial, transparent, and institutional-grade." />
+  <title>YearRing Fund — On-chain private fund management</title>
+  <meta name="description" content="YearRing is a non-custodial fund protocol on Base. Deposit USDC, earn real yield via Aave V3, exit on your terms." />
+  <meta property="og:title" content="YearRing Fund" />
+  <meta property="og:description" content="Professional fund management, on-chain." />
+  <meta property="og:type" content="website" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
 
   <style>
+    /* ── Reset & tokens ─────────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --primary: #3755c3;
-      --primary-dim: #2d47aa;
-      --surface: #faf8ff;
-      --surface-container: #f0eeff;
-      --on-surface: #113069;
-      --on-surface-variant: #4a5568;
-      --outline: #d1d5e8;
+      --green:        #18281e;
+      --green-dim:    #2d3e33;
+      --brown:        #715a3e;
+      --bg:           #fbf9f5;
+      --surface:      #f5f3ef;
+      --surface-low:  #f0ede8;
+      --border:       #e8e8e2;
+      --border-strong:#c3c8c2;
+      --ink:          #1b1c1a;
+      --ink-muted:    #434844;
+      --ink-faint:    #8a9089;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Manrope', sans-serif;
-      background: var(--surface);
-      color: var(--on-surface);
+      background: var(--bg);
+      color: var(--ink);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Nav ──────────────────────────────────────────────────────────────── */
+    /* ── Utilities ──────────────────────────────────────────────────────────── */
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+    .serif { font-family: 'Noto Serif', Georgia, serif; }
+    .label-tag {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green); background: rgba(24,40,30,0.06);
+      border: 1px solid rgba(24,40,30,0.14);
+      padding: 0.25rem 0.7rem; border-radius: 100px;
+    }
+    .label-dot {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--green);
+    }
+
+    /* ── Navigation ─────────────────────────────────────────────────────────── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(250, 248, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--outline);
-      padding: 0 max(1.5rem, env(safe-area-inset-left));
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(251,249,245,0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-
     .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
+      max-width: 1120px; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
     }
-
-    .logo {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      text-decoration: none;
+    .nav-logo {
+      display: flex; align-items: center; gap: 9px; text-decoration: none;
     }
-
-    .logo-name {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -0.03em;
-      line-height: 1;
+    .nav-logo-mark {
+      width: 30px; height: 30px; border-radius: 7px; overflow: hidden; flex-shrink: 0;
     }
-
-    .logo-sub {
-      font-size: 0.6rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--on-surface-variant);
+    .nav-logo-text {
+      display: flex; flex-direction: column; gap: 1px;
     }
-
+    .nav-logo-name {
+      font-size: 0.95rem; font-weight: 800; color: var(--ink);
+      letter-spacing: -0.02em; line-height: 1;
+    }
+    .nav-logo-sub {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--ink-faint);
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 600; color: var(--ink-muted);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
     .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: var(--primary);
-      color: #fff;
-      font-size: 0.875rem;
-      font-weight: 700;
-      padding: 0.55rem 1.25rem;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: opacity 0.15s;
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: var(--green); color: #fbf9f5;
+      font-size: 0.8rem; font-weight: 700;
+      padding: 0.5rem 1.1rem; border-radius: 8px;
+      text-decoration: none; transition: opacity 0.15s;
     }
-
     .nav-cta:hover { opacity: 0.88; }
 
-    /* ── Hero ─────────────────────────────────────────────────────────────── */
+    /* ── Hero ───────────────────────────────────────────────────────────────── */
     .hero {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 7rem 1.5rem 5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 4rem;
+      padding: 7rem 1.5rem 6rem;
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 5rem;
     }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--primary);
-      background: #eaedff;
-      border: 1px solid #c7cff7;
-      padding: 0.3rem 0.85rem;
-      border-radius: 100px;
+    .hero-eyebrow { margin-bottom: 1.75rem; }
+    .hero h1 {
+      font-family: 'Noto Serif', Georgia, serif;
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      font-weight: 600; line-height: 1.08;
+      letter-spacing: -0.025em; color: var(--ink);
       margin-bottom: 1.5rem;
     }
-
-    .hero-eyebrow::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--primary);
+    .hero h1 em {
+      font-style: italic; color: var(--green);
     }
-
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      color: var(--on-surface);
-      margin-bottom: 1.25rem;
-    }
-
-    .hero h1 span { color: var(--primary); }
-
     .hero-desc {
-      font-size: 1.05rem;
-      color: var(--on-surface-variant);
-      max-width: 480px;
-      margin-bottom: 2.25rem;
-      line-height: 1.75;
+      font-size: 1rem; line-height: 1.8;
+      color: var(--ink-muted); max-width: 460px;
+      margin-bottom: 2.5rem;
     }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
+    .hero-actions { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--primary);
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 0.85rem 1.75rem;
-      border-radius: 10px;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--green); color: #fbf9f5;
+      font-size: 0.9rem; font-weight: 700;
+      padding: 0.8rem 1.6rem; border-radius: 10px;
       text-decoration: none;
-      transition: opacity 0.15s, transform 0.1s;
+      transition: opacity 0.15s, transform 0.12s;
     }
-
     .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--primary);
-      font-size: 0.95rem;
-      font-weight: 600;
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.875rem; font-weight: 600; color: var(--ink-muted);
       text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.15s;
+      border-bottom: 1.5px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
     }
-
-    .btn-secondary:hover { border-color: var(--primary); }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--border-strong); }
 
     /* Hero card */
     .hero-card {
-      background: #fff;
-      border: 1px solid var(--outline);
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 4px 32px rgba(55, 85, 195, 0.08);
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 20px; padding: 2rem;
+      box-shadow: 0 2px 24px rgba(24,40,30,0.07);
     }
-
+    .hero-card-live {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #15803d;
+      background: #dcfce7; border: 1px solid #bbf7d0;
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+    .hero-card-live::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%; background: #16a34a;
+      animation: livepulse 2s infinite;
+    }
+    @keyframes livepulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     .hero-card-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--on-surface-variant);
-      margin-bottom: 0.5rem;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--ink-faint); margin-bottom: 0.35rem;
     }
-
     .hero-card-value {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--on-surface);
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-card-row {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--outline);
-    }
-
-    .hero-card-stat { flex: 1; }
-
-    .hero-card-stat .label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--on-surface-variant);
+      font-family: 'Noto Serif', serif;
+      font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; color: var(--ink);
       margin-bottom: 0.25rem;
     }
-
-    .hero-card-stat .value {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--on-surface);
+    .hero-card-sub {
+      font-size: 0.75rem; color: var(--ink-muted); margin-bottom: 1.5rem;
+    }
+    .hero-card-divider { border: none; border-top: 1px solid var(--border); margin-bottom: 1.25rem; }
+    .hero-card-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .hero-card-stat .s-label {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink-faint); margin-bottom: 0.2rem;
+    }
+    .hero-card-stat .s-value {
+      font-size: 0.875rem; font-weight: 700; color: var(--ink);
+    }
+    .hero-card-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .tag {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--green); background: rgba(24,40,30,0.06);
+      border: 1px solid rgba(24,40,30,0.12);
+      padding: 0.2rem 0.55rem; border-radius: 6px;
     }
 
-    .badge-live {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #16a34a;
-      background: #dcfce7;
-      border: 1px solid #bbf7d0;
-      padding: 0.2rem 0.6rem;
-      border-radius: 100px;
-      margin-bottom: 1rem;
-    }
-
-    .badge-live::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #16a34a;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    /* ── Features ─────────────────────────────────────────────────────────── */
-    .features {
-      background: #fff;
-      border-top: 1px solid var(--outline);
-      border-bottom: 1px solid var(--outline);
-      padding: 5rem 1.5rem;
-    }
-
-    .features-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      text-align: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--primary);
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--on-surface);
-      margin-bottom: 0.75rem;
-    }
-
-    .section-desc {
-      text-align: center;
-      font-size: 1rem;
-      color: var(--on-surface-variant);
-      max-width: 520px;
-      margin: 0 auto 3.5rem;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .feature-card {
+    /* ── Trust strip ────────────────────────────────────────────────────────── */
+    .trust-strip {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
       background: var(--surface);
-      border: 1px solid var(--outline);
-      border-radius: 16px;
-      padding: 1.75rem;
-      transition: box-shadow 0.2s, transform 0.2s;
+      padding: 1.25rem 1.5rem;
+    }
+    .trust-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      gap: 2.5rem; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.75rem; font-weight: 600; color: var(--ink-muted);
+    }
+    .trust-item svg { opacity: 0.5; }
+    .trust-sep {
+      width: 1px; height: 18px; background: var(--border-strong); opacity: 0.5;
     }
 
-    .feature-card:hover {
-      box-shadow: 0 8px 32px rgba(55, 85, 195, 0.1);
-      transform: translateY(-2px);
+    /* ── Philosophy ─────────────────────────────────────────────────────────── */
+    .philosophy { padding: 7rem 1.5rem; }
+    .philosophy-header {
+      max-width: 560px; margin: 0 auto 4rem; text-align: center;
+    }
+    .section-eyebrow {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--brown); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Noto Serif', serif; font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 600; line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1rem;
+    }
+    .section-desc {
+      font-size: 0.95rem; color: var(--ink-muted); line-height: 1.75;
+    }
+    .philosophy-grid {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .phil-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 18px;
+      padding: 2rem; transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .phil-card:hover {
+      box-shadow: 0 8px 32px rgba(24,40,30,0.08); transform: translateY(-2px);
+    }
+    .phil-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(24,40,30,0.06); display: flex; align-items: center;
+      justify-content: center; margin-bottom: 1.25rem; font-size: 1.3rem;
+    }
+    .phil-title {
+      font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem;
+    }
+    .phil-desc {
+      font-size: 0.875rem; color: var(--ink-muted); line-height: 1.7;
     }
 
-    .feature-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: #eaedff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .feature-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--on-surface);
-      margin-bottom: 0.5rem;
-    }
-
-    .feature-desc {
-      font-size: 0.875rem;
-      color: var(--on-surface-variant);
-      line-height: 1.65;
-    }
-
-    /* ── How it works ─────────────────────────────────────────────────────── */
+    /* ── How it works ───────────────────────────────────────────────────────── */
     .how {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 5rem 1.5rem;
+      background: var(--surface); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); padding: 7rem 1.5rem;
     }
-
+    .how-header { max-width: 520px; margin: 0 auto 4.5rem; text-align: center; }
     .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 3rem;
-      position: relative;
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--border); border: 1px solid var(--border); border-radius: 18px;
+      overflow: hidden;
     }
-
     .step {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      padding: 1.5rem;
-      background: #fff;
-      border: 1px solid var(--outline);
-      border-radius: 16px;
+      background: var(--bg); padding: 2rem 1.75rem;
     }
-
     .step-num {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: #fff;
-      font-size: 0.8rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-family: 'Noto Serif', serif; font-size: 1.5rem; font-weight: 600;
+      color: var(--green); opacity: 0.35; margin-bottom: 1rem; line-height: 1;
     }
-
     .step-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--on-surface);
+      font-size: 0.9rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem;
     }
-
     .step-desc {
-      font-size: 0.85rem;
-      color: var(--on-surface-variant);
-      line-height: 1.6;
+      font-size: 0.8rem; color: var(--ink-muted); line-height: 1.65;
+    }
+    .step-badge {
+      display: inline-block; margin-top: 0.85rem;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--brown); background: rgba(113,90,62,0.08);
+      border: 1px solid rgba(113,90,62,0.18);
+      padding: 0.18rem 0.5rem; border-radius: 5px;
     }
 
-    /* ── CTA banner ───────────────────────────────────────────────────────── */
-    .cta-banner {
-      margin: 0 1.5rem 5rem;
-      max-width: 1100px;
-      margin-left: auto;
-      margin-right: auto;
-      background: linear-gradient(135deg, var(--primary) 0%, #5b78e8 100%);
-      border-radius: 24px;
-      padding: 4rem 3rem;
-      text-align: center;
-      color: #fff;
+    /* ── Security ───────────────────────────────────────────────────────────── */
+    .security { padding: 7rem 1.5rem; }
+    .security-header { max-width: 520px; margin: 0 auto 4rem; text-align: center; }
+    .security-grid {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
     }
-
-    .cta-banner h2 {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
-    }
-
-    .cta-banner p {
-      font-size: 1rem;
-      opacity: 0.85;
-      margin-bottom: 2rem;
-    }
-
-    .btn-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+    .sec-card {
+      border: 1px solid var(--border); border-radius: 18px; padding: 1.75rem;
       background: #fff;
-      color: var(--primary);
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 0.85rem 1.75rem;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: opacity 0.15s, transform 0.1s;
+    }
+    .sec-card-head {
+      display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.85rem;
+    }
+    .sec-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0;
+    }
+    .sec-title {
+      font-size: 0.9rem; font-weight: 700; color: var(--ink);
+    }
+    .sec-desc {
+      font-size: 0.8rem; color: var(--ink-muted); line-height: 1.7;
+    }
+    .sec-detail {
+      margin-top: 0.85rem; padding-top: 0.85rem; border-top: 1px solid var(--border);
+      font-size: 0.72rem; font-weight: 600; color: var(--ink-faint);
+      letter-spacing: 0.03em;
     }
 
-    .btn-white:hover { opacity: 0.9; transform: translateY(-1px); }
+    /* ── CTA ────────────────────────────────────────────────────────────────── */
+    .cta-section { padding: 0 1.5rem 7rem; }
+    .cta-banner {
+      max-width: 1120px; margin: 0 auto;
+      background: var(--green); border-radius: 24px;
+      padding: 5rem 3.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 120%, rgba(255,255,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-eyebrow {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(251,249,245,0.5); margin-bottom: 1.25rem;
+    }
+    .cta-banner h2 {
+      font-family: 'Noto Serif', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; line-height: 1.1;
+      letter-spacing: -0.02em; color: #fbf9f5; margin-bottom: 1rem;
+    }
+    .cta-banner p {
+      font-size: 0.95rem; color: rgba(251,249,245,0.65);
+      max-width: 440px; margin: 0 auto 2.5rem; line-height: 1.75;
+    }
+    .btn-cream {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: #fbf9f5; color: var(--green);
+      font-size: 0.9rem; font-weight: 700;
+      padding: 0.85rem 1.75rem; border-radius: 10px;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.12s;
+    }
+    .btn-cream:hover { opacity: 0.9; transform: translateY(-1px); }
 
-    /* ── Footer ───────────────────────────────────────────────────────────── */
+    /* ── Footer ─────────────────────────────────────────────────────────────── */
     footer {
-      border-top: 1px solid var(--outline);
-      padding: 2.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+      padding: 2.25rem 1.5rem;
     }
-
     .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+      max-width: 1120px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
     }
-
+    .footer-logo {
+      display: flex; align-items: center; gap: 8px; text-decoration: none;
+    }
+    .footer-logo-name {
+      font-size: 0.85rem; font-weight: 800; color: var(--ink); letter-spacing: -0.01em;
+    }
     .footer-copy {
-      font-size: 0.8rem;
-      color: var(--on-surface-variant);
+      font-size: 0.72rem; color: var(--ink-faint); line-height: 1.5;
     }
-
     .footer-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
+      display: flex; align-items: center; gap: 1.75rem;
     }
-
     .footer-links a {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--on-surface-variant);
-      text-decoration: none;
-      transition: color 0.15s;
+      font-size: 0.75rem; font-weight: 600; color: var(--ink-muted);
+      text-decoration: none; transition: color 0.15s;
     }
+    .footer-links a:hover { color: var(--ink); }
 
-    .footer-links a:hover { color: var(--primary); }
-
-    /* ── Responsive ───────────────────────────────────────────────────────── */
-    @media (max-width: 768px) {
+    /* ── Responsive ─────────────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
       .hero {
-        grid-template-columns: 1fr;
-        padding: 4rem 1.25rem 3rem;
-        gap: 2.5rem;
+        grid-template-columns: 1fr; padding: 4.5rem 1.25rem 3.5rem; gap: 3rem;
       }
-
-      .cta-banner {
-        padding: 3rem 1.5rem;
-        border-radius: 16px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .philosophy-grid, .security-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .trust-sep { display: none; }
+      .cta-banner { padding: 3.5rem 1.75rem; border-radius: 18px; }
+    }
+    @media (max-width: 560px) {
+      .steps { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.4rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── Navigation ──────────────────────────────────────────────────────── -->
-  <nav>
-    <div class="nav-inner">
-      <a href="/" class="logo">
-        <span class="logo-name">YearRing</span>
-        <span class="logo-sub">Fund Protocol</span>
-      </a>
-      <a href="https://app.yearringfund.com" class="nav-cta">
-        Launch App →
-      </a>
-    </div>
-  </nav>
-
-  <!-- ── Hero ────────────────────────────────────────────────────────────── -->
-  <section>
-    <div class="hero">
-      <div>
-        <div class="hero-eyebrow">Live on Base Mainnet</div>
-        <h1>On-chain fund<br /><span>management</span>,<br />redefined.</h1>
-        <p class="hero-desc">
-          YearRing is a non-custodial, institutional-grade fund protocol built on Base.
-          Deposit USDC, earn yield, and maintain full on-chain transparency at all times.
-        </p>
-        <div class="hero-actions">
-          <a href="https://app.yearringfund.com" class="btn-primary">
-            Launch App →
-          </a>
-          <a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener" class="btn-secondary">
-            View Protocol ↗
-          </a>
-        </div>
+<!-- ── Navigation ──────────────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 1024 1024">
+          <rect width="1024" height="1024" rx="220" fill="#18281e"/>
+          <path fill="#fbf9f5" d="M526.843 209.84C544.165 210.412 561.389 212.665 578.275 216.566C629.766 227.98 672.817 250.275 712.836 284.833C772.336 336.873 809.047 410.178 815.079 488.996C821.257 568.907 795.309 647.982 742.987 708.697C730.78 722.699 720.308 732.395 706.213 744.383C656.106 787.001 599.147 810.158 533.534 814.549C453.626 820.406 374.69 794.103 314.266 741.486C253.105 688.748 215.424 613.856 209.526 533.313C203.867 453.3 230.195 374.311 282.728 313.693C335.826 252.715 411.074 215.462 491.76 210.208L497.356 209.906C497.633 222.195 497.45 234.946 497.391 247.255C436.623 251.234 381.121 272.969 335.819 313.915C282.714 361.235 250.615 427.737 246.603 498.752C243.329 570.159 268.654 639.924 316.97 692.604C359.737 739.51 424.848 772.834 488.56 775.855C489.63 760.401 489.068 736.847 488.797 721.027C473.17 720.585 457.012 720.87 441.333 720.651C423.798 720.406 403.618 720.946 386.707 715.441C400.305 712.57 406.989 711.759 420.66 707.301C451.93 697.105 478.78 674.645 493.422 644.971C468.659 653.834 429.467 654.876 404.565 646.288C446.321 638.426 476.298 616.385 493.897 577.076C467.581 583.774 444.571 585.002 418.044 577.478C429.162 575.379 436.702 573.635 446.941 568.316C468.347 557.196 488.404 532.918 495.289 509.809C472.171 518.547 462.893 518.973 438.458 517.206C440.953 516.128 443.42 514.986 445.856 513.781C452.809 510.264 459.247 505.031 464.972 499.789C488.787 477.98 502.67 451.542 512.483 421.197C513.448 424.946 514.517 428.668 515.689 432.358C524.478 459.484 543.194 487.889 565.708 505.559C571.836 510.369 577.858 513.654 584.706 517.173C561.867 519.178 549.959 517.441 528.506 510.235C538.661 544.714 573.397 573.341 608.812 578.452C585.183 585.343 553.081 583.656 529.419 576.967C543.75 611.71 581.289 640.373 617.882 647.5C612.342 649.048 605.114 650.031 599.337 650.742C574.74 653.77 554.272 652.758 530.423 645.716C543.534 672.852 570.012 695.782 598.21 705.979C610.176 710.306 623.653 712.658 636.152 714.689C617.734 719.624 598.052 720.9 579.054 720.776C564.147 720.678 549.312 719.77 534.466 721.577C534.311 739.399 534.257 757.222 534.303 775.045C570.767 773.829 606.978 761.989 638.758 744.572C655.053 735.264 670.545 724.615 685.072 712.736C737.954 668.115 770.924 604.298 776.717 535.348C783.203 466.233 761.842 397.387 717.372 344.081C679.236 298.536 630.924 267.638 572.713 253.922C557.469 250.33 542.678 248.913 527.105 247.535C526.862 234.972 526.775 222.406 526.843 209.84Z"/>
+          <path fill="#fbf9f5" d="M526.792 274.175C583.451 276.451 638.798 302.387 679.092 341.917C724.655 385.766 750.72 446.063 751.446 509.294C752.012 570.338 728.238 634.301 685.314 678.046C679.689 677.985 673.701 678.152 668.051 678.222C655.631 678.506 643.141 678.214 630.686 678.397C677.283 638.914 705.243 597.014 712.063 535.011C718.078 481.6 702.309 428.02 668.321 386.383C630.712 339.656 585.192 317.896 526.494 311.497C526.944 298.853 526.644 286.77 526.792 274.175Z"/>
+          <path fill="#fbf9f5" d="M490.315 274.702C491.746 274.464 495.841 274.369 497.481 274.285L497.502 311.896C496.167 311.951 494.833 312.041 493.502 312.164C439.95 317.177 390.629 343.411 356.54 385.015C322.67 426.229 306.534 479.197 311.674 532.294C316.013 579.305 338.541 625.358 371.678 658.69C378.752 665.805 385.755 671.537 393.478 677.945C383.266 677.884 373.222 678.223 362.875 678.085C355.517 678.024 347.868 677.849 340.542 678.184C336.648 674.578 331.972 669.024 328.403 664.967C297.872 630.257 278.583 581.915 273.942 535.956C267.895 472.198 287.499 408.657 328.417 359.388C368.831 309.888 427.102 281.071 490.315 274.702Z"/>
+          <path fill="#fbf9f5" d="M496.299 338.757L497.069 338.743C498.147 340.863 497.522 371.364 497.488 375.786C488.993 376.528 479.356 378.676 471.257 381.199C418.415 397.659 381.332 444.507 375.817 499.246C372.495 531.857 380.496 564.618 398.479 592.025C404.179 600.59 409.13 605.636 415.476 613.394L379.398 613.227L367.935 613.462C362.767 606.451 357.82 596.91 354.132 588.96C325.281 526.772 334.092 452.993 378.051 400.119C407.783 364.809 450.311 342.741 496.299 338.757Z"/>
+          <path fill="#fbf9f5" d="M526.831 338.375C531.482 338.58 536.426 339.476 541.038 340.186C632.156 354.21 698.476 444.79 685.408 535.876C681.611 562.343 671.428 591.598 655.591 613.413L646.062 613.433L607.621 613.331C629.067 594.581 644.17 560.234 647.783 532.159C652.906 495.21 642.89 457.757 620.005 428.298C597.251 398.907 563.622 379.914 526.704 375.602L526.831 338.375Z"/>
+        </svg>
       </div>
-
-      <div class="hero-card">
-        <div class="badge-live">Live</div>
-        <div class="hero-card-label">Total Value Locked</div>
-        <div class="hero-card-value">On-chain</div>
-        <div class="hero-card-row">
-          <div class="hero-card-stat">
-            <div class="label">Network</div>
-            <div class="value">Base</div>
-          </div>
-          <div class="hero-card-stat">
-            <div class="label">Asset</div>
-            <div class="value">USDC</div>
-          </div>
-          <div class="hero-card-stat">
-            <div class="label">Custody</div>
-            <div class="value">Non-custodial</div>
-          </div>
-        </div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">YearRing</span>
+        <span class="nav-logo-sub">Fund Protocol</span>
       </div>
-    </div>
-  </section>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener">Protocol</a></li>
+    </ul>
+    <a href="https://app.yearringfund.com" class="nav-cta">Launch App →</a>
+  </div>
+</nav>
 
-  <!-- ── Features ────────────────────────────────────────────────────────── -->
-  <section class="features">
-    <div class="features-inner">
-      <div class="section-label">Protocol Features</div>
-      <h2 class="section-title">Everything you need from a fund</h2>
-      <p class="section-desc">
-        Built on ERC-4626 with institutional-grade controls, fully transparent and verifiable on-chain.
+<!-- ── Hero ────────────────────────────────────────────────────────────────── -->
+<section>
+  <div class="hero">
+
+    <div>
+      <div class="hero-eyebrow">
+        <span class="label-tag"><span class="label-dot"></span>Live on Base Mainnet</span>
+      </div>
+      <h1>Professional fund<br />management,<br /><em>on-chain.</em></h1>
+      <p class="hero-desc">
+        YearRing is a non-custodial fund protocol built on Base.
+        Deposit USDC, earn real yield through Aave V3, and exit
+        on your own terms — with full on-chain transparency at every step.
       </p>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🏦</div>
-          <div class="feature-title">ERC-4626 Vault</div>
-          <div class="feature-desc">
-            Deposit USDC and receive fbUSDC shares representing your proportional stake. NAV accrues in real time.
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔒</div>
-          <div class="feature-title">Lock &amp; Earn</div>
-          <div class="feature-desc">
-            Lock your shares for 30–180 days to receive fee rebates up to 60% and reward token issuance.
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">👤</div>
-          <div class="feature-title">Beneficiary System</div>
-          <div class="feature-desc">
-            Designate an on-chain beneficiary. Positions transfer automatically upon verified inactivity.
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🛡️</div>
-          <div class="feature-title">Non-custodial</div>
-          <div class="feature-desc">
-            All assets remain on-chain at all times. The protocol never takes custody of your funds.
-          </div>
-        </div>
+      <div class="hero-actions">
+        <a href="https://app.yearringfund.com" class="btn-primary">Launch App →</a>
+        <a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener" class="btn-ghost">
+          View protocol ↗
+        </a>
       </div>
     </div>
-  </section>
 
-  <!-- ── How it works ─────────────────────────────────────────────────────── -->
-  <section class="how">
-    <div class="section-label">How It Works</div>
-    <h2 class="section-title">Three steps to get started</h2>
-    <p class="section-desc">Connect your wallet on Base and start in minutes.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-title">Connect &amp; Deposit</div>
-        <div class="step-desc">Connect your wallet, approve USDC, and deposit into the fund vault to receive fbUSDC shares.</div>
+    <div class="hero-card">
+      <div class="hero-card-live">Live</div>
+      <div class="hero-card-label">Price Per Share</div>
+      <div class="hero-card-value">1.000&thinsp;<span style="font-size:1.1rem;opacity:.45">USDC</span></div>
+      <div class="hero-card-sub">Grows continuously as yield accrues</div>
+      <hr class="hero-card-divider" />
+      <div class="hero-card-stats">
+        <div class="hero-card-stat">
+          <div class="s-label">Network</div>
+          <div class="s-value">Base</div>
+        </div>
+        <div class="hero-card-stat">
+          <div class="s-label">Base Asset</div>
+          <div class="s-value">USDC</div>
+        </div>
+        <div class="hero-card-stat">
+          <div class="s-label">Strategy</div>
+          <div class="s-value">Aave V3</div>
+        </div>
+        <div class="hero-card-stat">
+          <div class="s-label">Custody</div>
+          <div class="s-value">Non-custodial</div>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-title">Lock for Rewards</div>
-        <div class="step-desc">Lock your fbUSDC shares for a chosen duration to earn fee rebates and RWT reward tokens.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-title">Grow &amp; Redeem</div>
-        <div class="step-desc">Your NAV grows as the fund deploys capital. Redeem fbUSDC for USDC at any time at current NAV.</div>
+      <div class="hero-card-tags">
+        <span class="tag">ERC-4626</span>
+        <span class="tag">24h Timelock</span>
+        <span class="tag">Emergency Exit</span>
+        <span class="tag">Open Source</span>
       </div>
     </div>
-  </section>
 
-  <!-- ── CTA Banner ───────────────────────────────────────────────────────── -->
-  <div style="padding: 0 1.5rem 5rem;">
-    <div class="cta-banner">
-      <h2>Ready to get started?</h2>
-      <p>Join the YearRing Fund Protocol on Base Mainnet today.</p>
-      <a href="https://app.yearringfund.com" class="btn-white">
-        Launch App →
-      </a>
+  </div>
+</section>
+
+<!-- ── Trust strip ──────────────────────────────────────────────────────────── -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 1 0 20 14.5 14.5 0 0 1 0-20"/><path d="M2 12h20"/></svg>
+      Base Mainnet
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Non-custodial
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Aave V3 yield
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      24h Timelock governance
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      Open source
     </div>
   </div>
+</div>
 
-  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
-  <footer>
-    <div class="footer-inner">
-      <span class="footer-copy">© 2026 YearRing Fund Protocol · Non-custodial · Non-guaranteed</span>
-      <div class="footer-links">
-        <a href="https://app.yearringfund.com">App</a>
-        <a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener">Protocol</a>
-      </div>
+<!-- ── Philosophy ───────────────────────────────────────────────────────────── -->
+<section class="philosophy">
+  <div class="philosophy-header">
+    <div class="section-eyebrow">Our principles</div>
+    <h2 class="section-title">Fund management should serve investors, not the protocol.</h2>
+    <p class="section-desc">Three commitments we refuse to compromise on.</p>
+  </div>
+  <div class="philosophy-grid">
+    <div class="phil-card">
+      <div class="phil-icon">◎</div>
+      <div class="phil-title">Full transparency</div>
+      <div class="phil-desc">Every position, every transaction, every fee accrual — written to Base and verifiable by anyone, at any time. No black boxes.</div>
     </div>
-  </footer>
+    <div class="phil-card">
+      <div class="phil-icon">⬡</div>
+      <div class="phil-title">Capital safety first</div>
+      <div class="phil-desc">All admin operations require a 24-hour Timelock. Emergency exit is always available. Reserve ratio keeps liquidity on hand for redemptions.</div>
+    </div>
+    <div class="phil-card">
+      <div class="phil-icon">◈</div>
+      <div class="phil-title">Real yield, not emissions</div>
+      <div class="phil-desc">Returns come from lending yield on Aave V3 — not token inflation. USDC in, USDC out. Price Per Share compounds directly.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How it works ─────────────────────────────────────────────────────────── -->
+<section class="how" id="how">
+  <div class="how-header">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">Four steps. No complexity.</h2>
+    <p class="section-desc">Connect your wallet on Base and start in minutes. No KYC, no minimums.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Connect & deposit</div>
+      <div class="step-desc">Connect your Base wallet, approve USDC, and deposit into the vault. You receive fbUSDC shares representing your stake.</div>
+      <span class="step-badge">ERC-4626</span>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Capital deployed</div>
+      <div class="step-desc">The fund manager deploys capital to Aave V3 via a 24h Timelock-governed transaction. Reserve ratio always maintained.</div>
+      <span class="step-badge">Aave V3 · Base</span>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Yield accrues silently</div>
+      <div class="step-desc">Lending interest accumulates in real time. Price Per Share rises continuously — no harvest transactions required.</div>
+      <span class="step-badge">Auto-compounding</span>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Redeem at any time</div>
+      <div class="step-desc">Burn your fbUSDC shares to receive USDC at the current Price Per Share. No lock-up period for standard redemptions.</div>
+      <span class="step-badge">Exit on your terms</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Security ─────────────────────────────────────────────────────────────── -->
+<section class="security" id="security">
+  <div class="security-header">
+    <div class="section-eyebrow">Security architecture</div>
+    <h2 class="section-title">Designed for capital that matters.</h2>
+    <p class="section-desc">Every layer of the protocol is built around protecting depositors first.</p>
+  </div>
+  <div class="security-grid">
+    <div class="sec-card">
+      <div class="sec-card-head">
+        <div class="sec-dot"></div>
+        <div class="sec-title">24-hour Timelock</div>
+      </div>
+      <div class="sec-desc">All admin operations — including fee changes, strategy updates, and role grants — are queued on-chain and executable only after a mandatory 24-hour delay. No instant admin actions.</div>
+      <div class="sec-detail">OpenZeppelin TimelockController · verified on Base</div>
+    </div>
+    <div class="sec-card">
+      <div class="sec-card-head">
+        <div class="sec-dot"></div>
+        <div class="sec-title">Emergency exit</div>
+      </div>
+      <div class="sec-desc">In any crisis scenario, the guardian can immediately pause the protocol. Emergency exit mode allows all depositors to claim their pro-rata USDC share regardless of liquidity conditions.</div>
+      <div class="sec-detail">Independent of Timelock · guardian-only</div>
+    </div>
+    <div class="sec-card">
+      <div class="sec-card-head">
+        <div class="sec-dot"></div>
+        <div class="sec-title">Reserve ratio</div>
+      </div>
+      <div class="sec-desc">A configurable percentage of all deposits is kept as idle USDC in the vault at all times, ensuring standard redemptions can be served without waiting for strategy divestment.</div>
+      <div class="sec-detail">On-chain parameter · visible to all</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ──────────────────────────────────────────────────────────────────── -->
+<div class="cta-section">
+  <div class="cta-banner">
+    <div class="cta-eyebrow">YearRing Fund Protocol · Base Mainnet</div>
+    <h2>Your capital.<br />On-chain.</h2>
+    <p>Join the allowlist or connect directly. Non-custodial, transparent, and built to last.</p>
+    <a href="https://app.yearringfund.com" class="btn-cream">Launch App →</a>
+  </div>
+</div>
+
+<!-- ── Footer ───────────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 1024 1024">
+        <rect width="1024" height="1024" rx="220" fill="#18281e"/>
+        <path fill="#fbf9f5" d="M526.843 209.84C544.165 210.412 561.389 212.665 578.275 216.566C629.766 227.98 672.817 250.275 712.836 284.833C772.336 336.873 809.047 410.178 815.079 488.996C821.257 568.907 795.309 647.982 742.987 708.697C730.78 722.699 720.308 732.395 706.213 744.383C656.106 787.001 599.147 810.158 533.534 814.549C453.626 820.406 374.69 794.103 314.266 741.486C253.105 688.748 215.424 613.856 209.526 533.313C203.867 453.3 230.195 374.311 282.728 313.693C335.826 252.715 411.074 215.462 491.76 210.208L497.356 209.906C497.633 222.195 497.45 234.946 497.391 247.255C436.623 251.234 381.121 272.969 335.819 313.915C282.714 361.235 250.615 427.737 246.603 498.752C243.329 570.159 268.654 639.924 316.97 692.604C359.737 739.51 424.848 772.834 488.56 775.855C489.63 760.401 489.068 736.847 488.797 721.027C473.17 720.585 457.012 720.87 441.333 720.651C423.798 720.406 403.618 720.946 386.707 715.441C400.305 712.57 406.989 711.759 420.66 707.301C451.93 697.105 478.78 674.645 493.422 644.971C468.659 653.834 429.467 654.876 404.565 646.288C446.321 638.426 476.298 616.385 493.897 577.076C467.581 583.774 444.571 585.002 418.044 577.478C429.162 575.379 436.702 573.635 446.941 568.316C468.347 557.196 488.404 532.918 495.289 509.809C472.171 518.547 462.893 518.973 438.458 517.206C440.953 516.128 443.42 514.986 445.856 513.781C452.809 510.264 459.247 505.031 464.972 499.789C488.787 477.98 502.67 451.542 512.483 421.197C513.448 424.946 514.517 428.668 515.689 432.358C524.478 459.484 543.194 487.889 565.708 505.559C571.836 510.369 577.858 513.654 584.706 517.173C561.867 519.178 549.959 517.441 528.506 510.235C538.661 544.714 573.397 573.341 608.812 578.452C585.183 585.343 553.081 583.656 529.419 576.967C543.75 611.71 581.289 640.373 617.882 647.5C612.342 649.048 605.114 650.031 599.337 650.742C574.74 653.77 554.272 652.758 530.423 645.716C543.534 672.852 570.012 695.782 598.21 705.979C610.176 710.306 623.653 712.658 636.152 714.689C617.734 719.624 598.052 720.9 579.054 720.776C564.147 720.678 549.312 719.77 534.466 721.577C534.311 739.399 534.257 757.222 534.303 775.045C570.767 773.829 606.978 761.989 638.758 744.572C655.053 735.264 670.545 724.615 685.072 712.736C737.954 668.115 770.924 604.298 776.717 535.348C783.203 466.233 761.842 397.387 717.372 344.081C679.236 298.536 630.924 267.638 572.713 253.922C557.469 250.33 542.678 248.913 527.105 247.535C526.862 234.972 526.775 222.406 526.843 209.84Z"/>
+      </svg>
+      <span class="footer-logo-name">YearRing</span>
+    </a>
+    <span class="footer-copy">
+      © 2026 YearRing Fund Protocol · Non-custodial · Not investment advice · Audit pending
+    </span>
+    <div class="footer-links">
+      <a href="https://app.yearringfund.com">App</a>
+      <a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener">Protocol</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
