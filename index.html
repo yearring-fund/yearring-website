@@ -556,6 +556,33 @@
       font-size: 0.68rem; color: var(--ink-ghost); line-height: 1.5; margin-top: 1rem;
     }
 
+    /* ── FAQ ─────────────────────────────────────────────────────────────── */
+    .faq-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      font-size: 0.95rem; font-weight: 700; color: var(--ink);
+      margin-bottom: 0.6rem; line-height: 1.4;
+    }
+    .faq-a {
+      font-size: 0.85rem; color: var(--ink-muted); line-height: 1.8;
+    }
+
+    /* ── Official Channels ──────────────────────────────────────────────── */
+    .official-channel {
+      display: flex; flex-direction: column; gap: 0.2rem;
+    }
+    .official-ch-label {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink-ghost);
+    }
+    .official-ch-link {
+      font-size: 0.82rem; font-weight: 600; color: var(--ink-muted);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .official-ch-link:hover { color: var(--green); }
+
     /* ── Responsive ──────────────────────────────────────────────────────── */
     @media (max-width: 960px) {
       .hero-inner { grid-template-columns: 1fr; padding: 5rem 1.5rem 4rem; gap: 3.5rem; }
@@ -604,9 +631,10 @@
       </div>
     </a>
     <ul class="nav-links">
+      <li><a href="#about">About</a></li>
       <li><a href="#principles">Principles</a></li>
-      <li><a href="#why">Why YearRing</a></li>
       <li><a href="#security">Security</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener">Protocol ↗</a></li>
     </ul>
     <a href="https://app.yearringfund.com" class="nav-cta">Launch App →</a>
@@ -632,7 +660,7 @@
       </p>
       <div class="hero-actions">
         <a href="https://app.yearringfund.com" class="btn-primary">Launch App →</a>
-        <a href="#security" class="btn-outline">View Security</a>
+        <a href="#security" class="btn-outline">Review Protocol</a>
       </div>
     </div>
 
@@ -710,6 +738,28 @@
       before it grows.
     </p>
     <div class="manifesto-byline">YearRing Fund Protocol · est. 2026</div>
+  </div>
+</section>
+
+<!-- ── About ──────────────────────────────────────────────────────────────── -->
+<section class="section-pad" id="about" style="background:var(--bg);">
+  <div class="wrap" style="max-width:800px;">
+    <div class="section-eyebrow">About</div>
+    <h2 class="section-title">What YearRing is.</h2>
+    <div style="display:flex;flex-direction:column;gap:1.25rem;">
+      <p class="section-body">
+        YearRing Fund is an on-chain capital management protocol. It accepts USDC deposits, issues ERC-4626 shares (fbUSDC), and deploys capital into conservative yield strategies. The first and current strategy is Aave V3 USDC supply on Base.
+      </p>
+      <p class="section-body">
+        The protocol adds a structured management layer on top of strategy yield: on-chain reserve ratios, a 24-hour timelock on all administrative operations, a permanent emergency exit path, and role separation between normal administration and emergency response.
+      </p>
+      <p class="section-body">
+        YearRing is built and operated by a small, focused team. The contracts are open source, verified on BaseScan, and designed to be independently reviewable. There is no venture funding to announce, no advisory board to display, and no partnership logos to borrow credibility from. The protocol is the product. The code is the proof.
+      </p>
+      <p class="section-body" style="color:var(--ink-faint);font-size:0.88rem;">
+        Current status: live on Base Mainnet under invited allowlist access. Formal audit in preparation. Allowlist expansion will follow audit completion.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -956,6 +1006,46 @@
   </div>
 </section>
 
+<!-- ── FAQ ────────────────────────────────────────────────────────────────── -->
+<section class="section-pad" id="faq" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap" style="max-width:800px;">
+    <div class="section-header left" style="margin-bottom:3rem;">
+      <div class="section-eyebrow">FAQ</div>
+      <h2 class="section-title">Common questions.</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;">
+      <div class="faq-item">
+        <div class="faq-q">What is YearRing Fund?</div>
+        <div class="faq-a">A non-custodial fund protocol on Base. You deposit USDC, receive fbUSDC shares, and the protocol deploys capital into Aave V3 to earn supply yield. A management layer handles reserve policy, governance delays, and emergency exits on your behalf.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is this custodial?</div>
+        <div class="faq-a">No. Your deposits are held in on-chain smart contracts, not by any person or entity. You hold fbUSDC shares in your own wallet and can redeem them at any time in normal operation. No one — including the admin — can transfer, freeze, or redirect your shares.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is the yield source?</div>
+        <div class="faq-a">Aave V3 USDC supply on Base. The vault deposits USDC into Aave's lending pool and earns the market supply rate. There is no leverage, no recursive borrowing, and no token emission used as yield. Price Per Share reflects only real strategy performance.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do withdrawals work?</div>
+        <div class="faq-a">In normal operation, redeem your fbUSDC shares for USDC at any time. The vault maintains an on-chain reserve ratio so standard redemptions are served from idle USDC without needing to divest from the strategy. In emergency mode, all depositors can claim pro-rata USDC through a snapshot-based exit round.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What safety controls exist?</div>
+        <div class="faq-a">24-hour timelock on all admin operations. Separate emergency role that can only pause — not reconfigure. On-chain reserve ratio. 70% hard cap on strategy deployment. Emergency exit path that cannot be removed. Role separation enforced at the contract level.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the protocol audited?</div>
+        <div class="faq-a">Not yet. A formal third-party audit is in preparation. The protocol currently operates under a limited-access allowlist. All contracts are open source, verified on BaseScan, and independently reviewable. Audit scope, auditor, and timeline will be published before any allowlist expansion.</div>
+      </div>
+      <div class="faq-item" style="border-bottom:none;">
+        <div class="faq-q">How do I verify the protocol is real?</div>
+        <div class="faq-a">All contracts are verified on <a href="https://basescan.org/address/0x9dD61ee543a9C51aBe7B26A89687C9aEeea98a54" target="_blank" rel="noopener" style="color:var(--green);text-decoration:underline;">BaseScan</a>. The full source code is on <a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener" style="color:var(--green);text-decoration:underline;">GitHub</a>. Only trust the channels listed in the Official Channels section below.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── Live Snapshot ───────────────────────────────────────────────────────── -->
 <section class="snapshot-section section-pad-sm">
   <div class="snapshot-inner wrap">
@@ -964,7 +1054,7 @@
       <div class="snapshot-items">
         <div class="snapshot-item">
           <div class="snap-label">Price Per Share</div>
-          <div class="snap-value mono" id="pps-value">—</div>
+          <div class="snap-value mono" id="pps-value" style="white-space:nowrap;">Fetching...</div>
         </div>
         <div class="snapshot-item">
           <div class="snap-label">Strategy</div>
@@ -992,6 +1082,56 @@
          onmouseout="this.style.color='var(--ink-muted)';this.style.borderColor='var(--border)'">
         Verify on BaseScan ↗
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Official Channels ──────────────────────────────────────────────────── -->
+<section class="section-pad-sm" id="official" style="border-top:1px solid var(--border);">
+  <div class="wrap" style="max-width:800px;">
+    <div class="section-eyebrow">Official Channels</div>
+    <h2 class="section-title" style="font-size:clamp(1.4rem,2.5vw,1.8rem);margin-bottom:2rem;">Verify before you trust.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.25rem;margin-bottom:2rem;">
+      <div class="official-channel">
+        <div class="official-ch-label">Website</div>
+        <a href="https://yearringfund.com" class="official-ch-link">yearringfund.com</a>
+      </div>
+      <div class="official-channel">
+        <div class="official-ch-label">App</div>
+        <a href="https://app.yearringfund.com" class="official-ch-link">app.yearringfund.com</a>
+      </div>
+      <div class="official-channel">
+        <div class="official-ch-label">GitHub</div>
+        <a href="https://github.com/yearring-fund/YearRing-FundProtocol" target="_blank" rel="noopener" class="official-ch-link">yearring-fund ↗</a>
+      </div>
+      <div class="official-channel">
+        <div class="official-ch-label">Email</div>
+        <a href="mailto:hello@yearringfund.com" class="official-ch-link">hello@yearringfund.com</a>
+      </div>
+      <div class="official-channel">
+        <div class="official-ch-label">Vault Contract</div>
+        <a href="https://basescan.org/address/0x9dD61ee543a9C51aBe7B26A89687C9aEeea98a54" target="_blank" rel="noopener" class="official-ch-link">BaseScan ↗</a>
+      </div>
+      <div class="official-channel">
+        <div class="official-ch-label">Timelock</div>
+        <a href="https://basescan.org/address/0x054Cb2c32D6062B291420584dE2e5952C372cDD6" target="_blank" rel="noopener" class="official-ch-link">BaseScan ↗</a>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--ink-faint);line-height:1.65;border-top:1px solid var(--border);padding-top:1.25rem;">
+      Any website, app, social account, or contact channel not listed here should be treated as unofficial. We do not provide support through private messages, groups, or third-party intermediaries.
+    </p>
+  </div>
+</section>
+
+<!-- ── Risk & Disclaimer ─────────────────────────────────────────────────── -->
+<section class="section-pad-sm" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap" style="max-width:800px;">
+    <div class="section-eyebrow" style="color:var(--ink-faint);">Risk Disclosure</div>
+    <div style="display:flex;flex-direction:column;gap:0.85rem;font-size:0.82rem;color:var(--ink-muted);line-height:1.75;">
+      <p>YearRing Fund Protocol is experimental software. Smart contracts have not been formally audited by a third party. The protocol operates under a limited-access allowlist while audit preparation is underway.</p>
+      <p>There are no guaranteed returns. Deposited capital is subject to smart contract risk, strategy risk (Aave V3 protocol conditions), and market risk. Price Per Share can decrease if the underlying strategy incurs losses.</p>
+      <p>Nothing on this website constitutes investment advice, a solicitation, or an offer to buy or sell any financial instrument. Users should independently evaluate all risks before interacting with the protocol.</p>
+      <p style="color:var(--ink-faint);font-size:0.78rem;">Only interact with contracts and interfaces listed in the Official Channels section above. The protocol is non-custodial — you are solely responsible for the security of your wallet and private keys.</p>
     </div>
   </div>
 </section>
@@ -1047,8 +1187,14 @@
         <div class="footer-col">
           <div class="footer-col-title">Security</div>
           <a href="#security">Architecture</a>
-          <a href="https://basescan.org/address/0x054Cb2c32D6062B291420584dE2e5952C372cDD6" target="_blank" rel="noopener">Timelock</a>
-          <a href="https://basescan.org/address/0x9dD61ee543a9C51aBe7B26A89687C9aEeea98a54" target="_blank" rel="noopener">Vault Contract</a>
+          <a href="#faq">FAQ</a>
+          <a href="https://basescan.org/address/0x054Cb2c32D6062B291420584dE2e5952C372cDD6" target="_blank" rel="noopener">Timelock ↗</a>
+          <a href="https://basescan.org/address/0x9dD61ee543a9C51aBe7B26A89687C9aEeea98a54" target="_blank" rel="noopener">Vault Contract ↗</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <a href="mailto:hello@yearringfund.com">hello@yearringfund.com</a>
+          <a href="#official">Official Channels</a>
         </div>
       </div>
     </div>
@@ -1110,7 +1256,10 @@
       document.getElementById('pps-value').textContent =
         pps.toLocaleString('en-US', { minimumFractionDigits: 6, maximumFractionDigits: 6 }) + ' USDC'
     }
-  } catch (_) { /* silently fail — static fallback already shows '—' */ }
+  } catch (_) {
+    document.getElementById('pps-value').textContent = 'View in App'
+    document.getElementById('pps-value').style.color = 'var(--ink-faint)'
+  }
 })()
 </script>
 
