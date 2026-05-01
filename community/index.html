@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>YearRing Community — Early community entry point</title>
+  <meta name="description" content="YearRing Community is the official early gathering point for people interested in long-term, programmable financial infrastructure — not speculation, not yield-chasing." />
+  <meta property="og:title" content="YearRing Community" />
+  <meta property="og:description" content="An early gathering point for people who think carefully about long-term, programmable financial infrastructure." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & tokens ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:        #18281e;
+      --green-mid:    #243529;
+      --green-dim:    #2d3e33;
+      --brown:        #715a3e;
+      --gold:         #9a7d52;
+      --bg:           #fbf9f5;
+      --surface:      #f5f3ef;
+      --surface-low:  #efece7;
+      --border:       #e8e8e2;
+      --border-strong:#c3c8c2;
+      --ink:          #1b1c1a;
+      --ink-muted:    #434844;
+      --ink-faint:    #8a9089;
+      --ink-ghost:    #b4b8b3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Typography ──────────────────────────────────────────────────────── */
+    .serif { font-family: 'Noto Serif', Georgia, serif; }
+
+    .eyebrow-pill {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green); background: rgba(24,40,30,0.06);
+      border: 1px solid rgba(24,40,30,0.14);
+      padding: 0.25rem 0.75rem 0.25rem 0.5rem; border-radius: 100px;
+    }
+    .eyebrow-dot {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--green);
+    }
+
+    /* ── Layout ──────────────────────────────────────────────────────────── */
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+    section { position: relative; }
+
+    /* ── Navigation ──────────────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(251,249,245,0.9);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .nav-mark {
+      width: 28px; height: 28px; border-radius: 6px; overflow: hidden; flex-shrink: 0;
+    }
+    .nav-wordmark { display: flex; flex-direction: column; gap: 1px; }
+    .nav-name {
+      font-size: 0.95rem; font-weight: 800; color: var(--ink);
+      letter-spacing: -0.02em; line-height: 1;
+    }
+    .nav-sub {
+      font-size: 0.5rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--ink-ghost);
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 600; color: var(--ink-muted);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--green); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: var(--green); color: #fbf9f5;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.01em;
+      padding: 0.5rem 1.1rem; border-radius: 8px;
+      text-decoration: none; transition: opacity 0.15s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── Hero ────────────────────────────────────────────────────────────── */
+    .hero {
+      max-width: 800px; margin: 0 auto; padding: 7rem 2rem 5.5rem;
+      text-align: center;
+    }
+    .hero-eyebrow { margin-bottom: 1.75rem; }
+    .hero h1 {
+      font-family: 'Noto Serif', Georgia, serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 600; line-height: 1.07;
+      letter-spacing: -0.03em; color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--green); }
+    .hero-desc {
+      font-size: 1rem; line-height: 1.85;
+      color: var(--ink-muted); max-width: 520px; margin: 0 auto 2.5rem;
+    }
+    .hero-desc strong { color: var(--ink); font-weight: 600; }
+    .hero-actions {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; flex-wrap: wrap;
+    }
+
+    /* ── Buttons ─────────────────────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--green); color: #fbf9f5;
+      font-size: 0.875rem; font-weight: 700;
+      padding: 0.85rem 1.75rem; border-radius: 10px;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.12s;
+    }
+    .btn-primary:hover { opacity: 0.87; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.875rem; font-weight: 600; color: var(--ink-muted);
+      text-decoration: none;
+      border: 1px solid var(--border-strong); border-radius: 10px;
+      padding: 0.85rem 1.5rem;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-outline:hover { color: var(--ink); border-color: var(--ink-muted); }
+    .btn-placeholder {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.875rem; font-weight: 600; color: var(--ink-ghost);
+      text-decoration: none;
+      border: 1px dashed var(--border-strong); border-radius: 10px;
+      padding: 0.85rem 1.5rem; cursor: default;
+    }
+
+    /* ── Section scaffold ────────────────────────────────────────────────── */
+    .section-pad    { padding: 6rem 2rem; }
+    .section-pad-sm { padding: 4.5rem 2rem; }
+
+    .section-eyebrow {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--brown); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Noto Serif', Georgia, serif;
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-weight: 600; line-height: 1.14; letter-spacing: -0.025em;
+      color: var(--ink); margin-bottom: 1rem;
+    }
+    .section-title em { font-style: italic; color: var(--green); }
+    .section-body {
+      font-size: 1rem; color: var(--ink-muted); line-height: 1.8;
+    }
+
+    /* ── Who grid ────────────────────────────────────────────────────────── */
+    .who-grid {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+    }
+    .who-card {
+      background: #fff; padding: 2.25rem 2rem;
+      transition: background 0.2s;
+    }
+    .who-card:hover { background: var(--bg); }
+    .who-num {
+      font-family: 'Noto Serif', serif;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+      color: var(--ink-ghost); margin-bottom: 1.25rem;
+    }
+    .who-title {
+      font-size: 0.92rem; font-weight: 700; color: var(--ink);
+      margin-bottom: 0.7rem; line-height: 1.35;
+    }
+    .who-body {
+      font-size: 0.82rem; color: var(--ink-muted); line-height: 1.75;
+    }
+
+    /* ── Does grid ───────────────────────────────────────────────────────── */
+    .does-grid {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border); border-radius: 18px; overflow: hidden;
+    }
+    .does-cell {
+      background: var(--surface); padding: 2rem 1.5rem;
+    }
+    .does-verb {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 0.85rem;
+    }
+    .does-body {
+      font-size: 0.8rem; color: var(--ink-muted); line-height: 1.75;
+    }
+
+    /* ── Tester path ─────────────────────────────────────────────────────── */
+    .path-list {
+      max-width: 720px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid var(--border); border-radius: 18px; overflow: hidden;
+    }
+    .path-row {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      padding: 1.75rem 2rem;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .path-row:last-child { border-bottom: none; }
+    .path-row:hover { background: var(--bg); }
+    .path-num {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+      border: 1.5px solid var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Noto Serif', serif;
+      font-size: 0.72rem; font-weight: 600; color: var(--ink-faint);
+    }
+    .path-content {}
+    .path-title {
+      font-size: 0.92rem; font-weight: 700; color: var(--ink); margin-bottom: 0.35rem;
+    }
+    .path-body {
+      font-size: 0.82rem; color: var(--ink-muted); line-height: 1.75;
+    }
+
+    /* ── Rules ───────────────────────────────────────────────────────────── */
+    .rules-list {
+      max-width: 720px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .rule-row {
+      display: flex; gap: 1.25rem; align-items: flex-start;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .rule-row:last-child { border-bottom: none; }
+    .rule-num {
+      font-family: 'Noto Serif', serif;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--ink-ghost); flex-shrink: 0; padding-top: 2px; min-width: 26px;
+    }
+    .rule-text {
+      font-size: 0.875rem; color: var(--ink-muted); line-height: 1.75;
+    }
+
+    /* ── Safety notice ───────────────────────────────────────────────────── */
+    .safety-section {
+      background: rgba(113,90,62,0.04);
+      border-top: 1px solid rgba(113,90,62,0.2);
+      border-bottom: 1px solid rgba(113,90,62,0.2);
+    }
+    .safety-inner { max-width: 800px; margin: 0 auto; }
+    .safety-eyebrow {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--brown); margin-bottom: 1.25rem;
+    }
+    .safety-list {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .safety-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(113,90,62,0.15);
+    }
+    .safety-item:last-child { border-bottom: none; }
+    .safety-icon {
+      font-size: 0.75rem; color: var(--brown); flex-shrink: 0; padding-top: 3px;
+    }
+    .safety-text {
+      font-size: 0.875rem; color: var(--ink-muted); line-height: 1.75;
+    }
+    .safety-text strong { color: var(--ink); font-weight: 600; }
+
+    /* ── Official links ──────────────────────────────────────────────────── */
+    .links-grid {
+      max-width: 720px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid var(--border); border-radius: 18px; overflow: hidden;
+    }
+    .link-row {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 1.25rem 1.75rem;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none; transition: background 0.15s;
+    }
+    .link-row:last-child { border-bottom: none; }
+    .link-row:hover { background: var(--bg); }
+    .link-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--green); min-width: 80px; flex-shrink: 0;
+    }
+    .link-desc {
+      font-size: 0.82rem; color: var(--ink-muted); line-height: 1.6; flex: 1;
+    }
+    .link-badge {
+      flex-shrink: 0;
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: 5px;
+      background: rgba(113,90,62,0.08); color: var(--brown);
+      border: 1px solid rgba(113,90,62,0.18);
+    }
+    .link-badge-live {
+      background: rgba(24,40,30,0.07); color: var(--green);
+      border: 1px solid rgba(24,40,30,0.2);
+    }
+    .link-arrow {
+      flex-shrink: 0; font-size: 0.78rem; color: var(--ink-ghost);
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+    }
+    .footer-inner { max-width: 1120px; margin: 0 auto; }
+    .footer-top {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem;
+      padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 8px; text-decoration: none; margin-bottom: 0.6rem;
+    }
+    .footer-logo-name {
+      font-size: 0.9rem; font-weight: 800; color: var(--ink); letter-spacing: -0.01em;
+    }
+    .footer-tagline {
+      font-size: 0.75rem; color: var(--ink-faint); line-height: 1.6; max-width: 240px;
+    }
+    .footer-nav { display: flex; gap: 3rem; }
+    .footer-col { display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col-title {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-ghost); margin-bottom: 0.25rem;
+    }
+    .footer-col a {
+      font-size: 0.78rem; font-weight: 500; color: var(--ink-muted);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .footer-col a:hover { color: var(--ink); }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy {
+      font-size: 0.7rem; color: var(--ink-ghost); line-height: 1.6;
+    }
+    .footer-risk {
+      font-size: 0.68rem; color: var(--ink-ghost); line-height: 1.6; max-width: 480px;
+      text-align: right;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero { padding: 5rem 1.5rem 4rem; }
+      .who-grid { grid-template-columns: 1fr; }
+      .does-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .footer-nav { display: none; }
+      .footer-risk { text-align: left; }
+    }
+    @media (max-width: 600px) {
+      .does-grid { grid-template-columns: 1fr; }
+      .path-row { padding: 1.25rem 1.25rem; }
+      .link-row { padding: 1rem 1.25rem; }
+      .section-pad { padding: 4rem 1.5rem; }
+      .section-pad-sm { padding: 3rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-mark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 1024 1024">
+          <rect width="1024" height="1024" rx="220" fill="#18281e"/>
+          <path fill="#fbf9f5" d="M526.843 209.84C544.165 210.412 561.389 212.665 578.275 216.566C629.766 227.98 672.817 250.275 712.836 284.833C772.336 336.873 809.047 410.178 815.079 488.996C821.257 568.907 795.309 647.982 742.987 708.697C730.78 722.699 720.308 732.395 706.213 744.383C656.106 787.001 599.147 810.158 533.534 814.549C453.626 820.406 374.69 794.103 314.266 741.486C253.105 688.748 215.424 613.856 209.526 533.313C203.867 453.3 230.195 374.311 282.728 313.693C335.826 252.715 411.074 215.462 491.76 210.208L497.356 209.906C497.633 222.195 497.45 234.946 497.391 247.255C436.623 251.234 381.121 272.969 335.819 313.915C282.714 361.235 250.615 427.737 246.603 498.752C243.329 570.159 268.654 639.924 316.97 692.604C359.737 739.51 424.848 772.834 488.56 775.855C489.63 760.401 489.068 736.847 488.797 721.027C473.17 720.585 457.012 720.87 441.333 720.651C423.798 720.406 403.618 720.946 386.707 715.441C400.305 712.57 406.989 711.759 420.66 707.301C451.93 697.105 478.78 674.645 493.422 644.971C468.659 653.834 429.467 654.876 404.565 646.288C446.321 638.426 476.298 616.385 493.897 577.076C467.581 583.774 444.571 585.002 418.044 577.478C429.162 575.379 436.702 573.635 446.941 568.316C468.347 557.196 488.404 532.918 495.289 509.809C472.171 518.547 462.893 518.973 438.458 517.206C440.953 516.128 443.42 514.986 445.856 513.781C452.809 510.264 459.247 505.031 464.972 499.789C488.787 477.98 502.67 451.542 512.483 421.197C513.448 424.946 514.517 428.668 515.689 432.358C524.478 459.484 543.194 487.889 565.708 505.559C571.836 510.369 577.858 513.654 584.706 517.173C561.867 519.178 549.959 517.441 528.506 510.235C538.661 544.714 573.397 573.341 608.812 578.452C585.183 585.343 553.081 583.656 529.419 576.967C543.75 611.71 581.289 640.373 617.882 647.5C612.342 649.048 605.114 650.031 599.337 650.742C574.74 653.77 554.272 652.758 530.423 645.716C543.534 672.852 570.012 695.782 598.21 705.979C610.176 710.306 623.653 712.658 636.152 714.689C617.734 719.624 598.052 720.9 579.054 720.776C564.147 720.678 549.312 719.77 534.466 721.577C534.311 739.399 534.257 757.222 534.303 775.045C570.767 773.829 606.978 761.989 638.758 744.572C655.053 735.264 670.545 724.615 685.072 712.736C737.954 668.115 770.924 604.298 776.717 535.348C783.203 466.233 761.842 397.387 717.372 344.081C679.236 298.536 630.924 267.638 572.713 253.922C557.469 250.33 542.678 248.913 527.105 247.535C526.862 234.972 526.775 222.406 526.843 209.84Z"/>
+        </svg>
+      </div>
+      <div class="nav-wordmark">
+        <span class="nav-name">YearRing</span>
+        <span class="nav-sub">Fund Protocol</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#principles">Principles</a></li>
+      <li><a href="/#security">Security</a></li>
+      <li><a href="/#faq">FAQ</a></li>
+      <li><a href="/community" class="active">Community</a></li>
+      <li><a href="https://github.com/yearring-fund" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+    <a href="https://app.yearringfund.com" class="nav-cta">Launch App →</a>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────────────────────────────────────── -->
+<section style="border-bottom: 1px solid var(--border);">
+  <div class="hero">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-pill">
+        <span class="eyebrow-dot"></span>
+        Early Access
+      </span>
+    </div>
+    <h1 class="serif">An early community for<br /><em>infrastructure thinkers.</em></h1>
+    <p class="hero-desc">
+      YearRing Community is the official gathering point for people who think carefully about
+      <strong>long-term, programmable financial infrastructure</strong> — not speculation,
+      not yield-chasing, not token launches.
+    </p>
+    <div class="hero-actions">
+      <!--
+        TODO: Replace the href below with the official Discord invite link when available.
+        Until then, this button is intentionally disabled (non-linked placeholder).
+      -->
+      <span class="btn-placeholder" title="Discord invite — coming soon">Join Discord (coming soon)</span>
+      <a href="https://github.com/yearring-fund" target="_blank" rel="noopener" class="btn-outline">View Protocol ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Why This Community Exists ──────────────────────────────────────────── -->
+<section class="section-pad" style="background:var(--bg);" id="why">
+  <div class="wrap" style="max-width:780px;">
+    <div class="section-eyebrow">Why we exist</div>
+    <h2 class="section-title">Built responsibly.<br /><em>Observed seriously.</em></h2>
+    <div style="display:flex;flex-direction:column;gap:1.25rem;">
+      <p class="section-body">
+        YearRing Fund Protocol is being built as long-term financial infrastructure — a programmable
+        vault layer that lets users deposit, lock, and structure commitments on-chain, with a
+        beneficiary and governance layer on top.
+      </p>
+      <p class="section-body">
+        Building that responsibly requires a small, serious group of early observers and testers who
+        care about system design, not just returns. This community is where that group forms.
+      </p>
+      <p class="section-body" style="color:var(--ink-faint);font-size:0.9rem;">
+        We are not looking for a large following. We are looking for the right people.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Who Should Join ─────────────────────────────────────────────────────── -->
+<section class="section-pad" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);" id="who">
+  <div style="max-width:1120px;margin:0 auto 3.5rem;padding:0 2rem;">
+    <div class="section-eyebrow">Who should join</div>
+    <h2 class="section-title">Serious about infrastructure.<br /><em>Not here for the hype.</em></h2>
+  </div>
+  <div class="who-grid wrap">
+    <div class="who-card">
+      <div class="who-num">01</div>
+      <div class="who-title">Protocol researchers and developers</div>
+      <div class="who-body">People interested in ERC-4626 vault design, commitment layers, on-chain governance mechanics, or reserve management architecture.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-num">02</div>
+      <div class="who-title">Long-term capital thinkers</div>
+      <div class="who-body">Those who want to observe a protocol built from first principles — not from hype cycles, emission schedules, or token launch playbooks.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-num">03</div>
+      <div class="who-title">Security-minded participants</div>
+      <div class="who-body">People who want to understand a system before it scales — and who can engage with technical risk honestly, without catastrophizing or dismissing.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-num">04</div>
+      <div class="who-title">Infrastructure-focused observers</div>
+      <div class="who-body">Interested in DeFi infrastructure — not meme tokens, not leverage, not yield farming. The protocol layer matters more to you than the current APY.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-num">05</div>
+      <div class="who-title">Careful, substantive contributors</div>
+      <div class="who-body">Willing to read documentation, ask informed questions, and report observations honestly. You show your reasoning, not just your conclusions.</div>
+    </div>
+    <div class="who-card" style="background:var(--surface-low);border-left:2px solid rgba(113,90,62,0.3);">
+      <div class="who-num" style="color:rgba(113,90,62,0.5);">—</div>
+      <div class="who-title" style="color:var(--ink-faint);">Not a fit</div>
+      <div class="who-body" style="color:var(--ink-ghost);">If you are primarily motivated by token price, airdrop eligibility, or short-term returns, this community is not the right place. There is no token. There is no airdrop. There is no points program.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── What the Community Does ────────────────────────────────────────────── -->
+<section class="section-pad" style="background:var(--bg);" id="what">
+  <div style="max-width:1120px;margin:0 auto 3.5rem;padding:0 2rem;">
+    <div class="section-eyebrow">What the community does</div>
+    <h2 class="section-title">Five things.<br /><em>Each one matters.</em></h2>
+  </div>
+  <div class="does-grid wrap">
+    <div class="does-cell">
+      <div class="does-verb">Observe</div>
+      <div class="does-body">Follow protocol development milestones, architectural decisions, and on-chain deployments as they happen — not through a marketing lens.</div>
+    </div>
+    <div class="does-cell">
+      <div class="does-verb">Discuss</div>
+      <div class="does-body">Exchange questions and feedback on protocol design, risk structures, fee mechanics, and governance systems with people who actually read the docs.</div>
+    </div>
+    <div class="does-cell">
+      <div class="does-verb">Test</div>
+      <div class="does-body">Invited members may participate in controlled-access testing rounds on Base Mainnet. Access is granted — not won, not purchased, not airdropped.</div>
+    </div>
+    <div class="does-cell">
+      <div class="does-verb">Report</div>
+      <div class="does-body">Surface edge cases, UI issues, documentation gaps, and security observations through the proper channels — not publicly, not speculatively.</div>
+    </div>
+    <div class="does-cell">
+      <div class="does-verb">Signal</div>
+      <div class="does-body">Provide structured feedback that informs future protocol decisions. Not hype, not pressure — considered input from people who understand what they are commenting on.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Early Tester Path ──────────────────────────────────────────────────── -->
+<section class="section-pad-sm" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);" id="tester">
+  <div style="max-width:720px;margin:0 auto 3rem;padding:0 2rem;">
+    <div class="section-eyebrow">Early tester path</div>
+    <h2 class="section-title">How access works.</h2>
+    <p class="section-body" style="font-size:0.9rem;">
+      Testing access is controlled and invitation-based. There is no public mint, no whitelist
+      competition, and no points system. Access is granted based on demonstrated interest and fit.
+    </p>
+  </div>
+  <div class="path-list" style="padding:0 2rem;max-width:720px;margin:0 auto;">
+    <div class="path-row">
+      <div class="path-num">01</div>
+      <div class="path-content">
+        <div class="path-title">Join the community</div>
+        <div class="path-body">Follow the official channels listed below and read the available documentation. Understand the protocol before requesting access.</div>
+      </div>
+    </div>
+    <div class="path-row">
+      <div class="path-num">02</div>
+      <div class="path-content">
+        <div class="path-title">Engage substantively</div>
+        <div class="path-body">Ask or answer questions that show system understanding. Demonstrate that you read docs and think carefully — not that you are enthusiastic.</div>
+      </div>
+    </div>
+    <div class="path-row">
+      <div class="path-num">03</div>
+      <div class="path-content">
+        <div class="path-title">Express interest</div>
+        <div class="path-body">If a testing round is open, express interest through the designated process. Do not message team members directly to ask for access.</div>
+      </div>
+    </div>
+    <div class="path-row">
+      <div class="path-num">04</div>
+      <div class="path-content">
+        <div class="path-title">Receive an official invitation</div>
+        <div class="path-body">If access is granted, you will be contacted through verifiable official channels — never through a private message requesting any wallet action or personal key.</div>
+      </div>
+    </div>
+    <div class="path-row">
+      <div class="path-num">05</div>
+      <div class="path-content">
+        <div class="path-title">Test and report</div>
+        <div class="path-body">Use the protocol as directed. Document what you observe. Submit structured feedback. Your keys remain yours — we will never ask for them under any circumstance.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Community Rules ────────────────────────────────────────────────────── -->
+<section class="section-pad" style="background:var(--bg);" id="rules">
+  <div style="max-width:720px;margin:0 auto 3rem;padding:0 2rem;">
+    <div class="section-eyebrow">Community rules</div>
+    <h2 class="section-title">Seven rules.<br /><em>Non-negotiable.</em></h2>
+  </div>
+  <div class="rules-list" style="padding:0 2rem;max-width:720px;margin:0 auto;">
+    <div class="rule-row">
+      <div class="rule-num">01</div>
+      <div class="rule-text">Discuss the protocol, not its price. There is no token. Speculation is off-topic.</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-num">02</div>
+      <div class="rule-text">Be precise. Vague questions get vague answers. Show your reasoning.</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-num">03</div>
+      <div class="rule-text">No promotion of other protocols, tokens, or services in community spaces.</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-num">04</div>
+      <div class="rule-text">No unsolicited financial advice, yield comparisons, or return projections.</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-num">05</div>
+      <div class="rule-text">Respect the early-stage nature of this project. Unrealistic expectations create pressure that harms careful development.</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-num">06</div>
+      <div class="rule-text">Use the designated feedback and bug-report channels. Do not post sensitive findings publicly before responsible disclosure.</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-num">07</div>
+      <div class="rule-text">Team members communicate through official, verifiable accounts only. Report impersonators immediately — do not engage with them.</div>
+    </div>
+    <div class="rule-row" style="border-bottom:none;">
+      <div class="rule-num" style="color:transparent;">—</div>
+      <div class="rule-text" style="color:var(--ink-ghost);font-size:0.8rem;">Violations may result in removal. Serious violations — impersonation, phishing, coordinated manipulation — will be escalated.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Safety Notice ──────────────────────────────────────────────────────── -->
+<section class="section-pad-sm safety-section" id="safety">
+  <div class="safety-inner" style="padding:0 2rem;">
+    <div class="safety-eyebrow">Safety notice</div>
+    <div class="safety-list">
+      <div class="safety-item">
+        <div class="safety-icon">▲</div>
+        <div class="safety-text">
+          YearRing Fund Protocol is <strong>early-stage and has not been independently audited</strong> by a third-party security firm. Participation carries smart contract risk, strategy risk, and market risk.
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-icon">▲</div>
+        <div class="safety-text">
+          This community <strong>does not provide financial advice.</strong> Nothing here constitutes an investment recommendation, solicitation, or offer to buy or sell any financial instrument.
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-icon">▲</div>
+        <div class="safety-text">
+          <strong>No yield is guaranteed. No token allocation, airdrop, whitelist reward, or future access right is promised.</strong> There is no token. There is no points program.
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-icon">▲</div>
+        <div class="safety-text">
+          <strong>The team will never ask for your seed phrase, private keys, or direct wallet transfers through any private message, channel, or form</strong> — under any circumstance, including "verification," "testing access," or "reward claims."
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-icon">▲</div>
+        <div class="safety-text">
+          Always verify official links through the Official Channels section below. Treat any unsolicited contact — DMs, emails, or group messages — as potentially fraudulent.
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-icon">▲</div>
+        <div class="safety-text">
+          Only interact with <strong>smart contract addresses published in the official documentation</strong>. Contract addresses are listed on BaseScan and in the protocol repository.
+        </div>
+      </div>
+      <div class="safety-item" style="border-bottom:none;">
+        <div class="safety-icon" style="opacity:0.4;">▲</div>
+        <div class="safety-text" style="color:var(--ink-ghost);font-size:0.8rem;">
+          If you receive a message claiming to be from the YearRing team and requesting wallet access, private keys, or any transfer — report it immediately in the official community channel and do not follow any instructions in that message.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Official Links ──────────────────────────────────────────────────────── -->
+<section class="section-pad" style="background:var(--bg);" id="official">
+  <div style="max-width:720px;margin:0 auto 3rem;padding:0 2rem;">
+    <div class="section-eyebrow">Official links</div>
+    <h2 class="section-title">Only these sources.<br /><em>Verified, not searched.</em></h2>
+    <p class="section-body" style="font-size:0.88rem;">
+      Bookmark these directly. Do not rely on search results or unsolicited links. Any website,
+      app, social account, or contact channel not listed here should be treated as unofficial.
+    </p>
+  </div>
+  <div class="links-grid" style="padding:0 2rem;max-width:720px;margin:0 auto;">
+
+    <!--
+      TODO: Replace the href below with the official Discord invite link when the server is ready.
+      Keep the Coming Soon badge until then.
+    -->
+    <span class="link-row" style="cursor:default;color:inherit;">
+      <span class="link-label">Discord</span>
+      <span class="link-desc">Official community server — discussions, feedback, announcements, and controlled-access testing coordination</span>
+      <span class="link-badge">Coming Soon</span>
+    </span>
+
+    <!--
+      TODO: Replace the href below with the official X (Twitter) profile URL when available.
+      Keep the Coming Soon badge until then.
+    -->
+    <span class="link-row" style="cursor:default;color:inherit;">
+      <span class="link-label">X&nbsp;/&nbsp;Twitter</span>
+      <span class="link-desc">Development updates, milestone announcements, and official protocol communications</span>
+      <span class="link-badge">Coming Soon</span>
+    </span>
+
+    <a href="https://github.com/yearring-fund" target="_blank" rel="noopener" class="link-row">
+      <span class="link-label">GitHub</span>
+      <span class="link-desc">Protocol source code, technical documentation, audit reports, and verified contract deployments</span>
+      <span class="link-badge link-badge-live">Live</span>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a href="https://app.yearringfund.com" class="link-row">
+      <span class="link-label">App</span>
+      <span class="link-desc">Protocol interface on Base Mainnet — allowlist access only during current phase</span>
+      <span class="link-badge link-badge-live">Live</span>
+      <span class="link-arrow">↗</span>
+    </a>
+
+    <a href="mailto:hello@yearringfund.com" class="link-row">
+      <span class="link-label">Email</span>
+      <span class="link-desc">Direct contact for responsible disclosure, partnership inquiries, and formal communications</span>
+      <span class="link-arrow">→</span>
+    </a>
+
+  </div>
+  <p style="max-width:720px;margin:1.5rem auto 0;padding:0 2rem;font-size:0.78rem;color:var(--ink-ghost);line-height:1.65;">
+    We do not provide support through private messages, groups, or third-party intermediaries.
+    Any channel not listed here should be treated as unofficial.
+  </p>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="/" class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024">
+            <rect width="1024" height="1024" rx="220" fill="#18281e"/>
+            <path fill="#fbf9f5" d="M526.843 209.84C544.165 210.412 561.389 212.665 578.275 216.566C629.766 227.98 672.817 250.275 712.836 284.833C772.336 336.873 809.047 410.178 815.079 488.996C821.257 568.907 795.309 647.982 742.987 708.697C730.78 722.699 720.308 732.395 706.213 744.383C656.106 787.001 599.147 810.158 533.534 814.549C453.626 820.406 374.69 794.103 314.266 741.486C253.105 688.748 215.424 613.856 209.526 533.313C203.867 453.3 230.195 374.311 282.728 313.693C335.826 252.715 411.074 215.462 491.76 210.208L497.356 209.906C497.633 222.195 497.45 234.946 497.391 247.255C436.623 251.234 381.121 272.969 335.819 313.915C282.714 361.235 250.615 427.737 246.603 498.752C243.329 570.159 268.654 639.924 316.97 692.604C359.737 739.51 424.848 772.834 488.56 775.855C489.63 760.401 489.068 736.847 488.797 721.027C473.17 720.585 457.012 720.87 441.333 720.651C423.798 720.406 403.618 720.946 386.707 715.441C400.305 712.57 406.989 711.759 420.66 707.301C451.93 697.105 478.78 674.645 493.422 644.971C468.659 653.834 429.467 654.876 404.565 646.288C446.321 638.426 476.298 616.385 493.897 577.076C467.581 583.774 444.571 585.002 418.044 577.478C429.162 575.379 436.702 573.635 446.941 568.316C468.347 557.196 488.404 532.918 495.289 509.809C472.171 518.547 462.893 518.973 438.458 517.206C440.953 516.128 443.42 514.986 445.856 513.781C452.809 510.264 459.247 505.031 464.972 499.789C488.787 477.98 502.67 451.542 512.483 421.197C513.448 424.946 514.517 428.668 515.689 432.358C524.478 459.484 543.194 487.889 565.708 505.559C571.836 510.369 577.858 513.654 584.706 517.173C561.867 519.178 549.959 517.441 528.506 510.235C538.661 544.714 573.397 573.341 608.812 578.452C585.183 585.343 553.081 583.656 529.419 576.967C543.75 611.71 581.289 640.373 617.882 647.5C612.342 649.048 605.114 650.031 599.337 650.742C574.74 653.77 554.272 652.758 530.423 645.716C543.534 672.852 570.012 695.782 598.21 705.979C610.176 710.306 623.653 712.658 636.152 714.689C617.734 719.624 598.052 720.9 579.054 720.776C564.147 720.678 549.312 719.77 534.466 721.577C534.311 739.399 534.257 757.222 534.303 775.045C570.767 773.829 606.978 761.989 638.758 744.572C655.053 735.264 670.545 724.615 685.072 712.736C737.954 668.115 770.924 604.298 776.717 535.348C783.203 466.233 761.842 397.387 717.372 344.081C679.236 298.536 630.924 267.638 572.713 253.922C557.469 250.33 542.678 248.913 527.105 247.535C526.862 234.972 526.775 222.406 526.843 209.84Z"/>
+          </svg>
+          <span class="footer-logo-name">YearRing</span>
+        </a>
+        <div class="footer-tagline">Long-term capital management, on-chain. Built on Base.</div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <div class="footer-col-title">Protocol</div>
+          <a href="https://app.yearringfund.com">Launch App</a>
+          <a href="https://github.com/yearring-fund" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Community</div>
+          <a href="/community">Overview</a>
+          <a href="/community#who">Who Should Join</a>
+          <a href="/community#tester">Tester Path</a>
+          <a href="/community#safety">Safety Notice</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Contact</div>
+          <a href="mailto:hello@yearringfund.com">hello@yearringfund.com</a>
+          <a href="/community#official">Official Channels</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2026 YearRing Fund Protocol · Built on Base ·
+        <a href="/" style="color:inherit;text-decoration:underline;">Home</a>
+      </div>
+      <div class="footer-risk">
+        YearRing Fund Protocol is experimental software. No guaranteed returns.
+        Not investment advice. Smart contracts have not been formally audited.
+        You are solely responsible for the security of your wallet and private keys.
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
