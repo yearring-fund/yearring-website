@@ -335,6 +335,17 @@
     .link-arrow {
       flex-shrink: 0; font-size: 0.78rem; color: var(--ink-ghost);
     }
+    .link-group-header {
+      padding: 0.55rem 1.75rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-ghost);
+    }
+    .link-group-header + .link-group-header,
+    .link-group-header.link-group-sep {
+      border-top: 1px solid var(--border);
+    }
 
     /* ── Footer ──────────────────────────────────────────────────────────── */
     footer {
@@ -443,10 +454,11 @@
     </p>
     <div class="hero-actions">
       <!--
-        TODO: Replace the href below with the official Discord invite link when available.
-        Until then, this button is intentionally disabled (non-linked placeholder).
+        TODO: Replace href="#tester" with the official interest registration form URL when ready.
+        Options: a dedicated /interest/ page, Typeform, Google Form, or similar.
+        Current behavior: scrolls to the Early Tester Path section as a useful interim fallback.
       -->
-      <span class="btn-placeholder" title="Discord invite — coming soon">Join Discord (coming soon)</span>
+      <a href="#tester" class="btn-primary">Register interest →</a>
       <a href="https://github.com/yearring-fund" target="_blank" rel="noopener" class="btn-outline">View Protocol ↗</a>
     </div>
   </div>
@@ -506,7 +518,12 @@
       <div class="who-title">Careful, substantive contributors</div>
       <div class="who-body">Willing to read documentation, ask informed questions, and report observations honestly. You show your reasoning, not just your conclusions.</div>
     </div>
-    <div class="who-card" style="background:var(--surface-low);border-left:2px solid rgba(113,90,62,0.3);">
+    <div class="who-card">
+      <div class="who-num">06</div>
+      <div class="who-title">Careful early users</div>
+      <div class="who-body">Users who already understand wallet and USDC operations, and want to test long-term on-chain capital tools with small, risk-aware participation.</div>
+    </div>
+    <div class="who-card" style="grid-column: 1 / -1; background:var(--surface-low);border-left:2px solid rgba(113,90,62,0.3);">
       <div class="who-num" style="color:rgba(113,90,62,0.5);">—</div>
       <div class="who-title" style="color:var(--ink-faint);">Not a fit</div>
       <div class="who-body" style="color:var(--ink-ghost);">If you are primarily motivated by token price, airdrop eligibility, or short-term returns, this community is not the right place. No public token, airdrop, or points campaign is active at this stage.</div>
@@ -589,6 +606,20 @@
         <div class="path-body">Use the protocol as directed. Document what you observe. Submit structured feedback. Your keys remain yours — we will never ask for them under any circumstance.</div>
       </div>
     </div>
+  </div>
+
+  <!--
+    TODO: Replace href below with the official interest registration form URL when ready.
+    Options: a dedicated /interest/ page, Typeform, Google Form, or similar.
+    Until then, this links to the Official Channels section as a useful interim fallback.
+    Do NOT add any language here that promises token allocation, airdrop, or future access rights.
+  -->
+  <div style="max-width:720px;margin:2.5rem auto 0;padding:0 2rem;text-align:center;">
+    <a href="#official" class="btn-primary" style="display:inline-flex;">Apply for early testing interest →</a>
+    <p style="margin-top:0.85rem;font-size:0.75rem;color:var(--ink-ghost);line-height:1.65;">
+      No access is guaranteed. Expressions of interest are reviewed manually and
+      responded to through official channels only.
+    </p>
   </div>
 </section>
 
@@ -697,25 +728,8 @@
   </div>
   <div class="links-grid" style="padding:0 2rem;max-width:720px;margin:0 auto;">
 
-    <!--
-      TODO: Replace the href below with the official Discord invite link when the server is ready.
-      Keep the Coming Soon badge until then.
-    -->
-    <span class="link-row" style="cursor:default;color:inherit;">
-      <span class="link-label">Discord</span>
-      <span class="link-desc">Official community server — discussions, feedback, announcements, and controlled-access testing coordination</span>
-      <span class="link-badge">Coming Soon</span>
-    </span>
-
-    <!--
-      TODO: Replace the href below with the official X (Twitter) profile URL when available.
-      Keep the Coming Soon badge until then.
-    -->
-    <span class="link-row" style="cursor:default;color:inherit;">
-      <span class="link-label">X&nbsp;/&nbsp;Twitter</span>
-      <span class="link-desc">Development updates, milestone announcements, and official protocol communications</span>
-      <span class="link-badge">Coming Soon</span>
-    </span>
+    <!-- ── Live channels ── -->
+    <div class="link-group-header">Live</div>
 
     <a href="https://github.com/yearring-fund" target="_blank" rel="noopener" class="link-row">
       <span class="link-label">GitHub</span>
@@ -746,6 +760,29 @@
       </span>
       <span class="link-arrow">→</span>
     </a>
+
+    <!-- ── Coming soon channels ── -->
+    <div class="link-group-header link-group-sep">Coming soon</div>
+
+    <!--
+      TODO: Replace style="cursor:default" and add href with the official Discord invite link
+      when the server is ready. Remove the Coming Soon badge at that time.
+    -->
+    <span class="link-row" style="cursor:default;color:inherit;">
+      <span class="link-label">Discord</span>
+      <span class="link-desc">Official community server — discussions, feedback, announcements, and controlled-access testing coordination</span>
+      <span class="link-badge">Coming Soon</span>
+    </span>
+
+    <!--
+      TODO: Replace style="cursor:default" and add href with the official X (Twitter) profile URL
+      when available. Remove the Coming Soon badge at that time.
+    -->
+    <span class="link-row" style="cursor:default;color:inherit;">
+      <span class="link-label">X&nbsp;/&nbsp;Twitter</span>
+      <span class="link-desc">Development updates, milestone announcements, and official protocol communications</span>
+      <span class="link-badge">Coming Soon</span>
+    </span>
 
   </div>
   <p style="max-width:720px;margin:1.5rem auto 0;padding:0 2rem;font-size:0.78rem;color:var(--ink-ghost);line-height:1.65;">
