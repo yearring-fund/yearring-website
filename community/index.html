@@ -160,8 +160,8 @@
     }
 
     /* ── Section scaffold ────────────────────────────────────────────────── */
-    .section-pad    { padding: 6rem 2rem; }
-    .section-pad-sm { padding: 4.5rem 2rem; }
+    .section-pad    { padding: 8rem 2rem; }
+    .section-pad-sm { padding: 6rem 2rem; }
 
     .section-eyebrow {
       font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
@@ -169,7 +169,7 @@
     }
     .section-title {
       font-family: 'Noto Serif', Georgia, serif;
-      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
       font-weight: 600; line-height: 1.14; letter-spacing: -0.025em;
       color: var(--ink); margin-bottom: 1rem;
     }
@@ -200,7 +200,7 @@
       margin-bottom: 0.7rem; line-height: 1.35;
     }
     .who-body {
-      font-size: 0.82rem; color: var(--ink-muted); line-height: 1.75;
+      font-size: 0.85rem; color: var(--ink-muted); line-height: 1.75;
     }
 
     /* ── Does grid ───────────────────────────────────────────────────────── */
@@ -211,7 +211,7 @@
       border: 1px solid var(--border); border-radius: 18px; overflow: hidden;
     }
     .does-cell {
-      background: var(--surface); padding: 2rem 1.5rem;
+      background: #fff; padding: 2rem 1.5rem;
     }
     .does-verb {
       font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
@@ -390,12 +390,32 @@
       text-align: right;
     }
 
+    /* ── Mobile nav strip ────────────────────────────────────────────────── */
+    .nav-mobile {
+      display: none;
+      position: sticky; top: 60px; z-index: 99;
+      background: rgba(251,249,245,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 1.5rem; gap: 0.5rem;
+      overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .nav-mobile::-webkit-scrollbar { display: none; }
+    .nav-mobile a {
+      flex-shrink: 0; white-space: nowrap; text-decoration: none;
+      font-size: 0.7rem; font-weight: 600; color: var(--ink-muted);
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 0.28rem 0.7rem;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .nav-mobile a:hover { color: var(--ink); border-color: var(--border-strong); }
+
     /* ── Responsive ──────────────────────────────────────────────────────── */
     @media (max-width: 960px) {
       .hero { padding: 5rem 1.5rem 4rem; }
       .who-grid { grid-template-columns: 1fr; }
       .does-grid { grid-template-columns: 1fr 1fr; }
       .nav-links { display: none; }
+      .nav-mobile { display: flex; }
       .footer-nav { display: none; }
       .footer-risk { text-align: left; }
     }
@@ -403,8 +423,8 @@
       .does-grid { grid-template-columns: 1fr; }
       .path-row { padding: 1.25rem 1.25rem; }
       .link-row { padding: 1rem 1.25rem; }
-      .section-pad { padding: 4rem 1.5rem; }
-      .section-pad-sm { padding: 3rem 1.5rem; }
+      .section-pad { padding: 5rem 1.5rem; }
+      .section-pad-sm { padding: 4rem 1.5rem; }
     }
   </style>
 </head>
@@ -436,6 +456,16 @@
     <a href="https://app.yearringfund.com" class="nav-cta">Launch App →</a>
   </div>
 </nav>
+
+<!-- ── Mobile section nav ──────────────────────────────────────────────────── -->
+<div class="nav-mobile">
+  <a href="#why">Why</a>
+  <a href="#who">Who</a>
+  <a href="#tester">Tester Path</a>
+  <a href="#rules">Rules</a>
+  <a href="#safety">Safety</a>
+  <a href="#official">Official Links</a>
+</div>
 
 <!-- ── Hero ───────────────────────────────────────────────────────────────── -->
 <section style="border-bottom: 1px solid var(--border);">
@@ -615,7 +645,7 @@
     Do NOT add any language here that promises token allocation, airdrop, or future access rights.
   -->
   <div style="max-width:720px;margin:2.5rem auto 0;padding:0 2rem;text-align:center;">
-    <a href="#official" class="btn-primary" style="display:inline-flex;">Apply for early testing interest →</a>
+    <a href="#official" class="btn-outline">Apply for early testing interest →</a>
     <p style="margin-top:0.85rem;font-size:0.75rem;color:var(--ink-ghost);line-height:1.65;">
       No access is guaranteed. Expressions of interest are reviewed manually and
       responded to through official channels only.
@@ -729,7 +759,7 @@
   <div class="links-grid" style="padding:0 2rem;max-width:720px;margin:0 auto;">
 
     <!-- ── Live channels ── -->
-    <div class="link-group-header">Live</div>
+    <div class="link-group-header" style="color:var(--green);">Live</div>
 
     <a href="https://github.com/yearring-fund" target="_blank" rel="noopener" class="link-row">
       <span class="link-label">GitHub</span>
@@ -768,7 +798,7 @@
       TODO: Replace style="cursor:default" and add href with the official Discord invite link
       when the server is ready. Remove the Coming Soon badge at that time.
     -->
-    <span class="link-row" style="cursor:default;color:inherit;">
+    <span class="link-row" style="cursor:default;color:inherit;opacity:0.55;">
       <span class="link-label">Discord</span>
       <span class="link-desc">Official community server — discussions, feedback, announcements, and controlled-access testing coordination</span>
       <span class="link-badge">Coming Soon</span>
@@ -778,7 +808,7 @@
       TODO: Replace style="cursor:default" and add href with the official X (Twitter) profile URL
       when available. Remove the Coming Soon badge at that time.
     -->
-    <span class="link-row" style="cursor:default;color:inherit;">
+    <span class="link-row" style="cursor:default;color:inherit;opacity:0.55;">
       <span class="link-label">X&nbsp;/&nbsp;Twitter</span>
       <span class="link-desc">Development updates, milestone announcements, and official protocol communications</span>
       <span class="link-badge">Coming Soon</span>
