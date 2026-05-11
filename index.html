@@ -803,7 +803,7 @@
     <div class="trust-sep"></div>
     <div class="trust-item">
       <svg class="trust-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      24h Timelock governance
+      Governance hardening path
     </div>
     <div class="trust-sep"></div>
     <div class="trust-item">
@@ -872,10 +872,10 @@
     <h2 class="section-title">What YearRing is.</h2>
     <div style="display:flex;flex-direction:column;gap:1.25rem;">
       <p class="section-body">
-        YearRing Fund is an on-chain capital management protocol. It accepts USDC deposits, issues ERC-4626 shares (fbUSDC), and deploys capital into conservative yield strategies. The first and current strategy is Aave V3 USDC supply on Base.
+        YearRing Fund is an on-chain capital management protocol. It accepts USDC deposits, issues ERC-4626 shares (yrUSDC), and deploys capital into conservative yield strategies. The first and current strategy is Aave V3 USDC supply on Base.
       </p>
       <p class="section-body">
-        The protocol adds a structured management layer on top of strategy yield: on-chain reserve ratios, a 24-hour timelock on all administrative operations, a permanent emergency exit path, and role separation between normal administration and emergency response.
+        The protocol adds a structured management layer on top of strategy yield: on-chain reserve ratios, a permanent emergency exit path, and role separation between normal administration and emergency response. Timelock governance and multisig are planned and will be implemented before any allowlist expansion.
       </p>
       <p class="section-body">
         YearRing is built and operated by a small, focused team. The contracts are open source, verified on BaseScan, and designed to be independently reviewable. There is no venture funding to announce, no advisory board to display, and no partnership logos to borrow credibility from. The protocol is the product. The code is the proof.
@@ -949,7 +949,7 @@
               <div class="comparison-item"><span class="ci-marker ci-neutral">–</span>Single strategy exposure</div>
             </div>
             <div class="comparison-cell">
-              <div class="comparison-item"><span class="ci-marker ci-yes">✓</span>Unified fbUSDC share system</div>
+              <div class="comparison-item"><span class="ci-marker ci-yes">✓</span>Unified yrUSDC share system</div>
             </div>
           </div>
           <div class="comparison-row">
@@ -965,7 +965,7 @@
               <div class="comparison-item"><span class="ci-marker ci-neutral">–</span>Instant parameter changes</div>
             </div>
             <div class="comparison-cell">
-              <div class="comparison-item"><span class="ci-marker ci-yes">✓</span>24h Timelock on all admin ops</div>
+              <div class="comparison-item"><span class="ci-marker ci-yes">✓</span>Governance hardening path (planned)</div>
             </div>
           </div>
           <div class="comparison-row">
@@ -1022,14 +1022,14 @@
           <div class="wna-icon">⏱</div>
           <div>
             <div class="wna-label">Parameter changes affecting your capital</div>
-            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> Immediate. Governance can adjust reserve factor, fee tiers, and risk parameters with no delay visible to depositors.<br/><br/><strong style="color:var(--green);">YearRing:</strong> Every admin operation is queued through a 24-hour on-chain Timelock. You have a window to observe and act before any change takes effect.</div>
+            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> Immediate. Governance can adjust reserve factor, fee tiers, and risk parameters with no delay visible to depositors.<br/><br/><strong style="color:var(--green);">YearRing:</strong> The V2.1 beta operates under a monitored operator address with all contracts open source and verified. Timelock governance is a planned hardening step before any allowlist expansion — the architecture is designed to accommodate it.</div>
           </div>
         </div>
         <div class="wna-answer-row">
           <div class="wna-icon">🔒</div>
           <div>
             <div class="wna-label">What happens if the strategy fails</div>
-            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> You hold aTokens in a single strategy. There is no separate exit mechanism outside of standard redemption.<br/><br/><strong style="color:var(--green);">YearRing:</strong> Emergency exit is a permanent, architecture-level path. A designated guardian can trigger it at any time — bypassing the Timelock — and all depositors can claim their pro-rata USDC immediately.</div>
+            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> You hold aTokens in a single strategy. There is no separate exit mechanism outside of standard redemption.<br/><br/><strong style="color:var(--green);">YearRing:</strong> Emergency exit is a permanent, architecture-level path. A designated operator can activate Emergency Mode at any time, freezing deposits and withdrawals while the situation is resolved. Normal redeem and emergency paths are always structurally preserved — funds cannot be redirected or seized.</div>
           </div>
         </div>
         <div class="wna-answer-row">
@@ -1066,7 +1066,7 @@
       </div>
       <div style="display:flex;align-items:center;gap:0.6rem;">
         <span class="status-dot dot-ok" style="flex-shrink:0;"></span>
-        <span style="font-size:0.75rem;font-weight:600;color:var(--ink);">Timelock &amp; emergency exit active</span>
+        <span style="font-size:0.75rem;font-weight:600;color:var(--ink);">Emergency exit active · governance hardening planned</span>
       </div>
       <div style="display:flex;align-items:center;gap:0.6rem;">
         <span class="status-dot dot-ok" style="flex-shrink:0;"></span>
@@ -1081,27 +1081,27 @@
   <div class="security-grid wrap">
     <div class="sec-card">
       <div class="sec-card-top">
-        <div class="sec-title">24-hour Timelock</div>
-        <span class="sec-tag tag-active">Active</span>
+        <div class="sec-title">Governance Hardening Path</div>
+        <span class="sec-tag tag-pending">Planned</span>
       </div>
-      <div class="sec-body">All administrative operations — fee changes, strategy updates, role assignments, parameter modifications — are queued on-chain and executable only after a mandatory 24-hour delay. No admin action can take immediate effect. Depositors always have time to observe and react.</div>
-      <div class="sec-detail">OpenZeppelin TimelockController · deployed on Base · verifiable on BaseScan</div>
+      <div class="sec-body">Timelock governance and multisig are the next hardening step and will be implemented before any allowlist expansion. The V2.1 beta operates under a monitored operator address with on-chain reserve enforcement and emergency controls active. All contracts are open source and verified — the governance upgrade path is designed into the architecture.</div>
+      <div class="sec-detail">TimelockController + multisig · planned before allowlist expansion · contracts verified on BaseScan</div>
     </div>
     <div class="sec-card">
       <div class="sec-card-top">
         <div class="sec-title">Emergency Exit</div>
         <span class="sec-tag tag-active">Active</span>
       </div>
-      <div class="sec-body">In any crisis scenario, a designated guardian can immediately pause the protocol — without waiting for the Timelock. Emergency exit mode allows all depositors to claim their pro-rata USDC share regardless of strategy liquidity. This path is permanent and cannot be removed.</div>
-      <div class="sec-detail">Independent of Timelock · guardian-controlled · pro-rata claim guaranteed</div>
+      <div class="sec-body">In any crisis scenario, a designated operator can immediately activate Emergency Mode — freezing deposits and withdrawals while the situation is resolved. Emergency controls are limited to pause and exit mode: they cannot redirect or seize user funds. Normal redeem and emergency exit paths are always structurally preserved.</div>
+      <div class="sec-detail">systemMode=2 · operator-controlled · cannot redirect or seize funds · always structurally preserved</div>
     </div>
     <div class="sec-card">
       <div class="sec-card-top">
         <div class="sec-title">Reserve Ratio</div>
         <span class="sec-tag tag-active">Active</span>
       </div>
-      <div class="sec-body">A configurable percentage of all deposits is kept as idle USDC directly in the vault at all times. This ensures standard redemptions can be served without triggering a strategy divestment. The reserve target is an on-chain parameter — visible to all, changeable only through the Timelock.</div>
-      <div class="sec-detail">On-chain parameter · configurable by Timelock only · current reserve visible on BaseScan</div>
+      <div class="sec-body">An on-chain reserve band keeps idle USDC in the vault at all times: minimum 5%, target 10%, maximum 15% of total assets. Auto-rebalance enforces the band on every deposit and withdrawal. Standard redemptions are served from reserve — no strategy divestment required. Reserve parameters are on-chain and visible to all.</div>
+      <div class="sec-detail">MIN 5% / TARGET 10% / MAX 15% · auto-rebalance enforced · current reserve visible on BaseScan</div>
     </div>
     <div class="sec-card">
       <div class="sec-card-top">
@@ -1124,8 +1124,8 @@
         <div class="sec-title">Role Separation</div>
         <span class="sec-tag tag-active">Active</span>
       </div>
-      <div class="sec-body">Protocol roles are strictly separated: the Timelock holds administrative authority over all contracts; a separate guardian holds emergency pause capability only; the deployer has been fully removed from all default admin roles. No single key controls both normal and emergency operations.</div>
-      <div class="sec-detail">DEFAULT_ADMIN_ROLE → Timelock · EMERGENCY_ROLE → guardian · deployer admin removed</div>
+      <div class="sec-body">During the V2.1 beta, all admin, keeper, and emergency roles are held by a monitored operator address. Emergency controls are limited to pause and Emergency Mode — they cannot redirect or seize user funds. Multisig and Timelock governance are a planned hardening step before any allowlist expansion. Role separation is enforced architecturally and will be distributed as the protocol matures.</div>
+      <div class="sec-detail">V2.1 beta: monitored operator · emergency limited to pause/exit · multisig + timelock planned</div>
     </div>
   </div>
 </section>
@@ -1140,11 +1140,11 @@
     <div style="display:flex;flex-direction:column;">
       <div class="faq-item">
         <div class="faq-q">What is YearRing Fund?</div>
-        <div class="faq-a">A non-custodial fund protocol on Base. You deposit USDC, receive fbUSDC shares, and the protocol deploys capital into Aave V3 to earn supply yield. A management layer handles reserve policy, governance delays, and emergency exits on your behalf.</div>
+        <div class="faq-a">A non-custodial fund protocol on Base. You deposit USDC, receive yrUSDC shares, and the protocol deploys capital into Aave V3 to earn supply yield. A management layer handles reserve policy, on-chain accounting, and emergency controls on your behalf.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is this custodial?</div>
-        <div class="faq-a">No. Your deposits are held in on-chain smart contracts, not by any person or entity. You hold fbUSDC shares in your own wallet and can redeem them at any time in normal operation. No one — including the admin — can transfer, freeze, or redirect your shares.</div>
+        <div class="faq-a">No. Your deposits are held in on-chain smart contracts, not by any person or entity. You hold yrUSDC shares in your own wallet and can redeem them at any time in normal operation. No one — including the admin — can transfer, freeze, or redirect your shares.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">What is the yield source?</div>
@@ -1152,11 +1152,11 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">How do withdrawals work?</div>
-        <div class="faq-a">In normal operation, redeem your fbUSDC shares for USDC at any time. The vault maintains an on-chain reserve ratio so standard redemptions are served from idle USDC without needing to divest from the strategy. In emergency mode, all depositors can claim pro-rata USDC through a snapshot-based exit round.</div>
+        <div class="faq-a">In normal operation, redeem your yrUSDC shares for USDC at any time. The vault maintains an on-chain reserve band (5% min / 10% target / 15% max) so standard redemptions are served from idle USDC without needing to divest from the strategy. Emergency Mode freezes deposits and withdrawals while the operator resolves the situation — funds cannot be redirected or seized.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">What safety controls exist?</div>
-        <div class="faq-a">24-hour timelock on all admin operations. Separate emergency role that can only pause — not reconfigure. On-chain reserve ratio. 70% hard cap on strategy deployment. Emergency exit path that cannot be removed. Role separation enforced at the contract level.</div>
+        <div class="faq-a">On-chain reserve band enforced (5% min / 10% target / 15% max). Emergency controls limited to pause and exit mode — cannot redirect or seize funds. Emergency exit path structurally preserved and cannot be removed. All contracts open source and verified on BaseScan. Timelock governance and multisig planned before allowlist expansion.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is the protocol audited?</div>
@@ -1164,7 +1164,7 @@
       </div>
       <div class="faq-item" style="border-bottom:none;">
         <div class="faq-q">How do I verify the protocol is real?</div>
-        <div class="faq-a">All contracts are verified on <a href="https://basescan.org/address/0x9dD61ee543a9C51aBe7B26A89687C9aEeea98a54" target="_blank" rel="noopener" style="color:var(--green);text-decoration:underline;">BaseScan</a>. The full source code is on <a href="https://github.com/yearring-fund" target="_blank" rel="noopener" style="color:var(--green);text-decoration:underline;">GitHub</a>. Only trust the channels listed in the Official Channels section below.</div>
+        <div class="faq-a">All contracts are verified on <a href="https://basescan.org/address/0x53e45AcB32aCD80F3d215a007fD8FE87390746F8" target="_blank" rel="noopener" style="color:var(--green);text-decoration:underline;">BaseScan</a>. The full source code is on <a href="https://github.com/yearring-fund" target="_blank" rel="noopener" style="color:var(--green);text-decoration:underline;">GitHub</a>. Only trust the channels listed in the Official Channels section below.</div>
       </div>
     </div>
   </div>
@@ -1199,7 +1199,7 @@
       </div>
     </div>
     <div class="snapshot-cta-area">
-      <a href="https://basescan.org/address/0x9dD61ee543a9C51aBe7B26A89687C9aEeea98a54#readContract"
+      <a href="https://basescan.org/address/0x53e45AcB32aCD80F3d215a007fD8FE87390746F8#readContract"
          target="_blank" rel="noopener"
          style="font-size:0.75rem;font-weight:600;color:var(--ink-muted);text-decoration:none;display:inline-flex;align-items:center;gap:0.3rem;border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.85rem;transition:color 0.15s,border-color 0.15s;"
          onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--border-strong)'"
@@ -1238,11 +1238,7 @@
       </div>
       <div class="official-channel">
         <div class="official-ch-label">Vault Contract</div>
-        <a href="https://basescan.org/address/0x9dD61ee543a9C51aBe7B26A89687C9aEeea98a54" target="_blank" rel="noopener" class="official-ch-link">BaseScan ↗</a>
-      </div>
-      <div class="official-channel">
-        <div class="official-ch-label">Timelock</div>
-        <a href="https://basescan.org/address/0x054Cb2c32D6062B291420584dE2e5952C372cDD6" target="_blank" rel="noopener" class="official-ch-link">BaseScan ↗</a>
+        <a href="https://basescan.org/address/0x53e45AcB32aCD80F3d215a007fD8FE87390746F8" target="_blank" rel="noopener" class="official-ch-link">BaseScan ↗</a>
       </div>
     </div>
     <p style="font-size:0.78rem;color:var(--ink-faint);line-height:1.65;border-top:1px solid var(--border);padding-top:1.25rem;">
@@ -1316,8 +1312,7 @@
           <div class="footer-col-title">Security</div>
           <a href="#security">Architecture</a>
           <a href="#faq">FAQ</a>
-          <a href="https://basescan.org/address/0x054Cb2c32D6062B291420584dE2e5952C372cDD6" target="_blank" rel="noopener">Timelock ↗</a>
-          <a href="https://basescan.org/address/0x9dD61ee543a9C51aBe7B26A89687C9aEeea98a54" target="_blank" rel="noopener">Vault Contract ↗</a>
+          <a href="https://basescan.org/address/0x53e45AcB32aCD80F3d215a007fD8FE87390746F8" target="_blank" rel="noopener">Vault Contract ↗</a>
         </div>
         <div class="footer-col">
           <div class="footer-col-title">Community</div>
@@ -1389,24 +1384,31 @@
 (async () => {
   try {
     const rpc = 'https://mainnet.base.org'
-    const vault = '0x9dD61ee543a9C51aBe7B26A89687C9aEeea98a54'
-    // pricePerShare() selector — keccak256("pricePerShare()")[0:4]
+    const vault = '0x53e45AcB32aCD80F3d215a007fD8FE87390746F8'
+    // convertToAssets(uint256) selector — keccak256("convertToAssets(uint256)")[0:4]
+    const selector = '0x07a2d13a'
+    // Pass 1 full share = 1e18
+    const oneShare = BigInt('1000000000000000000')
+    const data = selector + oneShare.toString(16).padStart(64, '0')
     const res = await fetch(rpc, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         jsonrpc: '2.0', id: 1, method: 'eth_call',
-        params: [{ to: vault, data: '0x99530b06' }, 'latest']
+        params: [{ to: vault, data }, 'latest']
       })
     })
     const json = await res.json()
     if (json.result && json.result !== '0x') {
       const raw = BigInt(json.result)
-      // PPS has 18 decimals (shares are 18 dec, assets are 6 dec, offset 12)
-      // Display as USDC value: raw / 1e18 * 1e6 equivalent = raw / 1e12
-      const pps = Number(raw) / 1e18
-      document.getElementById('pps-value').textContent =
-        pps.toLocaleString('en-US', { minimumFractionDigits: 6, maximumFractionDigits: 6 }) + ' USDC'
+      // convertToAssets returns USDC with 6 decimals
+      function formatUSDC(value) {
+        const base = 1_000_000n
+        const integer = value / base
+        const fraction = (value % base).toString().padStart(6, '0')
+        return `${integer}.${fraction}`
+      }
+      document.getElementById('pps-value').textContent = formatUSDC(raw) + ' USDC'
     }
   } catch (_) {
     document.getElementById('pps-value').textContent = 'View in App'
