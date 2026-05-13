@@ -875,7 +875,7 @@
         YearRing Fund is an on-chain capital management protocol. It accepts USDC deposits, issues ERC-4626 shares (yrUSDC), and deploys capital into conservative yield strategies. The first and current strategy is Aave V3 USDC supply on Base.
       </p>
       <p class="section-body">
-        The protocol adds a structured management layer on top of strategy yield: on-chain reserve ratios, a structurally defined emergency response path, and role separation between normal administration and emergency response. Timelock governance and multisig are planned and will be implemented before any allowlist expansion.
+        The protocol adds a structured management layer on top of strategy yield: on-chain reserve ratios, a structurally defined emergency response path, and role separation between normal administration and emergency response. Timelock governance and multisig are planned and will be implemented before broader public access.
       </p>
       <p class="section-body">
         YearRing is built and operated by a small, focused team. The contracts are open source, verified on BaseScan, and designed to be independently reviewable. There is no venture funding to announce, no advisory board to display, and no partnership logos to borrow credibility from. The protocol is the product. The code is the proof.
@@ -1022,7 +1022,7 @@
           <div class="wna-icon">⏱</div>
           <div>
             <div class="wna-label">Parameter changes affecting your capital</div>
-            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> Immediate. Governance can adjust reserve factor, fee tiers, and risk parameters with no delay visible to depositors.<br/><br/><strong style="color:var(--green);">YearRing:</strong> The V2.1 beta operates under a monitored operator address with all contracts open source and verified. Timelock governance is a planned hardening step before any allowlist expansion — the architecture is designed to accommodate it.</div>
+            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> Immediate. Governance can adjust reserve factor, fee tiers, and risk parameters with no delay visible to depositors.<br/><br/><strong style="color:var(--green);">YearRing:</strong> The V2.1 beta operates under a monitored operator address with all contracts open source and verified. Timelock governance is a planned hardening step before broader public access — the architecture is designed to accommodate it.</div>
           </div>
         </div>
         <div class="wna-answer-row">
@@ -1084,7 +1084,7 @@
         <div class="sec-title">Governance Hardening Path</div>
         <span class="sec-tag tag-pending">Planned</span>
       </div>
-      <div class="sec-body">Timelock governance and multisig are the next hardening step and will be implemented before any allowlist expansion. The V2.1 beta operates under a monitored operator address with on-chain reserve enforcement and emergency controls active. All contracts are open source and verified — the governance upgrade path is designed into the architecture.</div>
+      <div class="sec-body">Timelock governance and multisig are the next hardening step and will be implemented before broader public access. The V2.1 beta operates under a monitored operator address with on-chain reserve enforcement and emergency controls active. All contracts are open source and verified — the governance upgrade path is designed into the architecture.</div>
       <div class="sec-detail">TimelockController + multisig · planned before allowlist expansion · contracts verified on BaseScan</div>
     </div>
     <div class="sec-card">
@@ -1117,15 +1117,15 @@
         <span class="sec-tag tag-pending">In preparation</span>
       </div>
       <div class="sec-body">Audit-pending is not audit-passed. We say this clearly — and then we say what it means for you: the protocol is live under a limited-access allowlist, with on-chain controls active, and the codebase is structured by design to be independently reviewable. The audit process formalises what is already verifiable by anyone with a text editor and a Base RPC.</div>
-      <div class="sec-detail">Audit scope · auditor · timeline — to be published publicly before any allowlist expansion</div>
+      <div class="sec-detail">Audit scope · auditor · timeline — to be published publicly before broader public access</div>
     </div>
     <div class="sec-card">
       <div class="sec-card-top">
         <div class="sec-title">Role Separation</div>
         <span class="sec-tag tag-active">Active</span>
       </div>
-      <div class="sec-body">During the V2.1 beta, all admin, keeper, and emergency roles are held by a monitored operator address. Emergency controls are limited to pause and Emergency Mode — they do not add a direct operator withdrawal path for user principal. Multisig and Timelock governance are a planned hardening step before any allowlist expansion. Role separation is enforced architecturally and will be distributed as the protocol matures.</div>
-      <div class="sec-detail">V2.1 beta: monitored operator · emergency limited to pause/exit · multisig + timelock planned</div>
+      <div class="sec-body">During the V2.1 beta, all admin, keeper, and emergency roles are held by a monitored operator address. Emergency controls are limited to pause and Emergency Mode — they do not add a direct operator withdrawal path for user principal. Multisig and Timelock governance are a planned hardening step before broader public access. Role separation is enforced architecturally and will be distributed as the protocol matures.</div>
+      <div class="sec-detail">V2.1 beta: monitored operator · emergency limited to pause / Emergency Mode · multisig + timelock planned</div>
     </div>
   </div>
 </section>
@@ -1152,7 +1152,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">How do withdrawals work?</div>
-        <div class="faq-a">In normal operation, redeem your yrUSDC shares for USDC at any time. The vault maintains an on-chain reserve band (5% min / 10% target / 15% max) so standard redemptions are served from idle USDC without needing to divest from the strategy. Emergency Mode freezes deposits and withdrawals while accounting, liquidity, or strategy risk is reviewed. Emergency Mode does not create a direct operator withdrawal path for user principal.</div>
+        <div class="faq-a">In normal operation, redeem your yrUSDC shares for USDC at any time. The vault maintains an on-chain reserve band (5% min / 10% target / 15% max). Standard redemptions are normally served from idle reserve. If reserve falls below the configured band, the protocol may rebalance by pulling liquidity back from the StrategyManager. Emergency Mode freezes deposits and withdrawals while accounting, liquidity, or strategy risk is reviewed. Emergency Mode does not create a direct operator withdrawal path for user principal.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">What safety controls exist?</div>
@@ -1160,7 +1160,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">Is the protocol audited?</div>
-        <div class="faq-a">Not yet. A formal third-party audit is in preparation. The protocol currently operates under a limited-access allowlist. All contracts are open source, verified on BaseScan, and independently reviewable. Audit scope, auditor, and timeline will be published before any allowlist expansion.</div>
+        <div class="faq-a">Not yet. A formal third-party audit is in preparation. The protocol currently operates under a limited-access allowlist. All contracts are open source, verified on BaseScan, and independently reviewable. Audit scope, auditor, and timeline will be published before broader public access.</div>
       </div>
       <div class="faq-item" style="border-bottom:none;">
         <div class="faq-q">How do I verify the protocol is real?</div>
