@@ -875,7 +875,7 @@
         YearRing Fund is an on-chain capital management protocol. It accepts USDC deposits, issues ERC-4626 shares (yrUSDC), and deploys capital into conservative yield strategies. The first and current strategy is Aave V3 USDC supply on Base.
       </p>
       <p class="section-body">
-        The protocol adds a structured management layer on top of strategy yield: on-chain reserve ratios, a permanent emergency exit path, and role separation between normal administration and emergency response. Timelock governance and multisig are planned and will be implemented before any allowlist expansion.
+        The protocol adds a structured management layer on top of strategy yield: on-chain reserve ratios, a structurally defined emergency response path, and role separation between normal administration and emergency response. Timelock governance and multisig are planned and will be implemented before any allowlist expansion.
       </p>
       <p class="section-body">
         YearRing is built and operated by a small, focused team. The contracts are open source, verified on BaseScan, and designed to be independently reviewable. There is no venture funding to announce, no advisory board to display, and no partnership logos to borrow credibility from. The protocol is the product. The code is the proof.
@@ -901,8 +901,8 @@
     </div>
     <div class="principle">
       <div class="principle-num">02</div>
-      <div class="principle-title">Your right to exit is not subject to protocol conditions.</div>
-      <div class="principle-body">Emergency exit is always available — regardless of system state, strategy liquidity, or governance status. The protocol's growth ambitions cannot override this guarantee because it is enforced architecturally, not by policy. No vote, no upgrade path, and no operational constraint can remove it.</div>
+      <div class="principle-title">Users should know the protocol's normal and emergency withdrawal behavior before they deposit.</div>
+      <div class="principle-body">The protocol preserves an emergency response path. Emergency Mode may temporarily freeze deposits and withdrawals while accounting, liquidity, or strategy risk is reviewed. Emergency controls are defined in the V2.1 contracts and are visible on-chain. Users should read and understand the withdrawal and emergency mechanics before depositing.</div>
     </div>
     <div class="principle">
       <div class="principle-num">03</div>
@@ -973,7 +973,7 @@
               <div class="comparison-item"><span class="ci-marker ci-neutral">–</span>No governed exit path</div>
             </div>
             <div class="comparison-cell">
-              <div class="comparison-item"><span class="ci-marker ci-yes">✓</span>Emergency exit always available</div>
+              <div class="comparison-item"><span class="ci-marker ci-yes">✓</span>Structurally defined emergency response path</div>
             </div>
           </div>
           <div class="comparison-row" style="border-bottom:none;">
@@ -1029,7 +1029,7 @@
           <div class="wna-icon">🔒</div>
           <div>
             <div class="wna-label">What happens if the strategy fails</div>
-            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> You hold aTokens in a single strategy. There is no separate exit mechanism outside of standard redemption.<br/><br/><strong style="color:var(--green);">YearRing:</strong> Emergency exit is a permanent, architecture-level path. A designated operator can activate Emergency Mode at any time, freezing deposits and withdrawals while the situation is resolved. Normal redeem and emergency paths are always structurally preserved. Emergency Mode does not create a direct operator withdrawal path for user principal.</div>
+            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> You hold aTokens in a single strategy. There is no separate exit mechanism outside of standard redemption.<br/><br/><strong style="color:var(--green);">YearRing:</strong> The protocol preserves a structurally defined emergency response path. A designated operator can activate Emergency Mode, freezing deposits and withdrawals while accounting, liquidity, or strategy risk is reviewed. Emergency controls are defined in the V2.1 contracts and are visible on-chain. Emergency Mode does not create a direct operator withdrawal path for user principal.</div>
           </div>
         </div>
         <div class="wna-answer-row">
@@ -1043,7 +1043,7 @@
           <div class="wna-icon">🏦</div>
           <div>
             <div class="wna-label">Reserve liquidity</div>
-            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> Redemption depends on available utilisation. During high-utilisation periods, liquidity can be limited.<br/><br/><strong style="color:var(--green);">YearRing:</strong> A configurable percentage of deposits is always held as idle USDC in the vault. Standard redemptions are served from reserve — no strategy divestment required.</div>
+            <div class="wna-text"><strong style="color:var(--ink-muted);">Aave:</strong> Redemption depends on available utilisation. During high-utilisation periods, liquidity can be limited.<br/><br/><strong style="color:var(--green);">YearRing:</strong> A configurable reserve band keeps idle USDC in the vault. Standard redemptions are normally served from idle reserve. If reserve falls below the configured band, the protocol may rebalance by pulling liquidity back from the StrategyManager before serving the redemption.</div>
           </div>
         </div>
       </div>
@@ -1100,7 +1100,7 @@
         <div class="sec-title">Reserve Ratio</div>
         <span class="sec-tag tag-active">Active</span>
       </div>
-      <div class="sec-body">An on-chain reserve band keeps idle USDC in the vault at all times: minimum 5%, target 10%, maximum 15% of total assets. Auto-rebalance enforces the band on every deposit and withdrawal. Standard redemptions are served from reserve — no strategy divestment required. Reserve parameters are on-chain and visible to all.</div>
+      <div class="sec-body">An on-chain reserve band keeps idle USDC in the vault: minimum 5%, target 10%, maximum 15% of total assets. Auto-rebalance enforces the band on every deposit and withdrawal. Standard redemptions are normally served from idle reserve. If reserve falls below the configured band, the protocol may rebalance by pulling liquidity back from the StrategyManager. Reserve parameters are on-chain and visible to all.</div>
       <div class="sec-detail">MIN 5% / TARGET 10% / MAX 15% · auto-rebalance enforced · current reserve visible on BaseScan</div>
     </div>
     <div class="sec-card">
@@ -1156,7 +1156,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">What safety controls exist?</div>
-        <div class="faq-a">On-chain reserve band enforced (5% min / 10% target / 15% max). Emergency controls freeze protocol activity and do not add a direct operator withdrawal path for user principal. Emergency exit path structurally preserved and cannot be removed. All contracts open source and verified on BaseScan. Timelock governance and multisig planned before allowlist expansion.</div>
+        <div class="faq-a">On-chain reserve band enforced (5% min / 10% target / 15% max). Emergency controls freeze protocol activity and do not add a direct operator withdrawal path for user principal. Emergency controls are defined in the current V2.1 contracts and are visible on-chain. All contracts open source and verified on BaseScan. Timelock governance and multisig planned before allowlist expansion.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is the protocol audited?</div>
